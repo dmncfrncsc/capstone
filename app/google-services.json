@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "260969473008",
+    "firebase_url": "https://tranos-819f7-default-rtdb.firebaseio.com",
+    "project_id": "tranos-819f7",
+    "storage_bucket": "tranos-819f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260969473008:android:488ae089d477ea8ca2b335",
+        "android_client_info": {
+          "package_name": "com.example.capstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260969473008-r6h84011tdmiq4u5u9bd92h653kcg8tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBwd1zJ-Aqq4aq5ahHclmbvEoVTWe9o9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260969473008-r6h84011tdmiq4u5u9bd92h653kcg8tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260969473008:android:695274e6b464b09aa2b335",
+        "android_client_info": {
+          "package_name": "com.example.testcapstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260969473008-o0aq6650b0cud5bhdf97mbcg8dhutu72.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.testcapstone",
+            "certificate_hash": "f7c66a4d18294d7b4383e0057997157011db0790"
+          }
+        },
+        {
+          "client_id": "260969473008-r6h84011tdmiq4u5u9bd92h653kcg8tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBwd1zJ-Aqq4aq5ahHclmbvEoVTWe9o9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260969473008-r6h84011tdmiq4u5u9bd92h653kcg8tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260969473008:android:eed841b61fb93ec0a2b335",
+        "android_client_info": {
+          "package_name": "com.restobar.tranos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260969473008-r6h84011tdmiq4u5u9bd92h653kcg8tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBwd1zJ-Aqq4aq5ahHclmbvEoVTWe9o9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260969473008-r6h84011tdmiq4u5u9bd92h653kcg8tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

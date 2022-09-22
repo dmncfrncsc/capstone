@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/anton</item>
+        <item>@font/archivo_black</item>
+        <item>@font/carme</item>
+        <item>@font/grand_hotel</item>
+        <item>@font/rubik_mono_one</item>
+        <item>@font/titan_one</item>
+    </array>
+</resources>
