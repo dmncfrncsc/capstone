@@ -1,5 +1,6 @@
 package com.example.capstone
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -38,6 +40,7 @@ class TakeOrderFragment(table: TextView) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val layoutManager = LinearLayoutManager(context)
         menuRecyclerView = view.findViewById(R.id.takeOrderMenuList)
         menuRecyclerView.layoutManager = layoutManager
@@ -84,6 +87,19 @@ class TakeOrderFragment(table: TextView) : Fragment() {
         dialog.show()
         dialog.window!!.attributes = lp
 
+       var btnConfirmOrder: Button = dialog.findViewById(R.id.btnConfirmOrder)
+
+        btnConfirmOrder.setOnClickListener{
+            Toast.makeText(context, "ORDER SUCCESS", Toast.LENGTH_SHORT).show()
+
+            var table:String = currentTable.text.toString()
+            dbref= FirebaseDatabase.getInstance().getReference("Orders").child(table)
+
+            dbref.setValue(orderList)
+            dialog.dismiss()
+            orderList.clear()
+
+        }
 
     }
     private fun getData() {

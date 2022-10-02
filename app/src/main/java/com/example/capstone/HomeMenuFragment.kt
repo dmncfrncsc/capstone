@@ -34,6 +34,8 @@ class HomeMenuFragment: Fragment(){
         menuArrayList = arrayListOf<menu_meal>()
 
         getMealData()
+
+
     }
 
 
@@ -61,7 +63,7 @@ class HomeMenuFragment: Fragment(){
             }
 
             override fun onItemClick(position: Int) {
-                TODO("Not yet implemented")
+                menuRecyclerView.isEnabled = true;
             }
 
 

@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, SelectTableFragment()).commit()
                 tool = findViewById(R.id.toolbar)
-                tool.title="SELECT TABLE"
+                tool.title="TRANOS"
             }
 
 
