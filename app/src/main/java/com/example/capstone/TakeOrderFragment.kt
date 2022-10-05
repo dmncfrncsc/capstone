@@ -1,34 +1,35 @@
 package com.example.capstone
 
-import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.database.*
+import com.google.firebase.firestore.*
 import java.text.DecimalFormat
-import java.text.NumberFormat
 
 
-class TakeOrderFragment(table: TextView) : Fragment() {
-    private lateinit var dbref: DatabaseReference
+class TakeOrderFragment(table: TextView, tableType: TextView) : Fragment() {
+    private lateinit var dbref: FirebaseFirestore
     private lateinit var menuRecyclerView: RecyclerView
     private lateinit var menuArrayList: ArrayList<menu_meal>
     private lateinit var orderList: ArrayList<DataCartList>
     private lateinit var cartRecyclerView: RecyclerView
     var currentTable: TextView = table
-    var tPrice: Long = 0
+    var tableType: TextView = tableType
     val dec = DecimalFormat("#,###.00")
 
-    val numFormat: NumberFormat = NumberFormat.getCurrencyInstance()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,19 +41,30 @@ class TakeOrderFragment(table: TextView) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val txttableType: TextView = view.findViewById(R.id.txtTableType)
+        val txtTableNum: TextView = view.findViewById(R.id.txtTableNum)
+        val btnMeal: Button = view.findViewById(R.id.btnMeal)
+        val btnDrinks: Button = view.findViewById(R.id.btnDrinks)
+        val btnCombo: Button = view.findViewById(R.id.btnCombo)
         val layoutManager = LinearLayoutManager(context)
+
+
+
         menuRecyclerView = view.findViewById(R.id.takeOrderMenuList)
+
         menuRecyclerView.layoutManager = layoutManager
         menuArrayList = arrayListOf<menu_meal>()
+
+        txttableType.text= tableType.text
+        txtTableNum.text ="${currentTable.text}"
 
 
 
         orderList = arrayListOf<DataCartList>()
 
 
-
-        var btnViewCart: Button = requireView().findViewById(R.id.viewOrderList)
+/*
+        var btnViewCart: ImageButton = requireView().findViewById(R.id.viewOrderList)
 
         btnViewCart.setOnClickListener{
             if (orderList.size.equals(0)){
@@ -61,12 +73,84 @@ class TakeOrderFragment(table: TextView) : Fragment() {
 
                 openCartDialog()
             }
+        }*/
+
+
+        val typeface: Typeface = Typeface.createFromAsset(requireActivity().assets, "carbon bl.ttf")
+
+        val txtAvailableMenu: TextView = view.findViewById(R.id.txtAvailableMenu)
+        txtAvailableMenu.typeface = typeface
+
+        btnMeal.setBackgroundResource(R.drawable.category_selected_bg)
+        btnMeal.setTextColor(Color.parseColor("#3498db"))
+        
+        btnMeal.setOnClickListener{
+
+            btnMeal.setBackgroundResource(R.drawable.category_selected_bg)
+            btnMeal.setTextColor(Color.parseColor("#3498db"))
+
+            btnDrinks.setBackgroundColor(Color.parseColor("#3498db"))
+            btnDrinks.setTextColor(Color.WHITE)
+
+            btnCombo.setBackgroundColor(Color.parseColor("#3498db"))
+            btnCombo.setTextColor(Color.WHITE)
         }
+
+        btnDrinks.setOnClickListener{
+
+            btnDrinks.setBackgroundResource(R.drawable.category_selected_bg)
+            btnDrinks.setTextColor(Color.parseColor("#3498db"))
+
+            btnMeal.setBackgroundColor(Color.parseColor("#3498db"))
+            btnMeal.setTextColor(Color.WHITE)
+
+            btnCombo.setBackgroundColor(Color.parseColor("#3498db"))
+            btnCombo.setTextColor(Color.WHITE)
+        }
+
+        btnCombo.setOnClickListener{
+
+            btnCombo.setBackgroundResource(R.drawable.category_selected_bg)
+            btnCombo.setTextColor(Color.parseColor("#3498db"))
+
+            btnMeal.setBackgroundColor(Color.parseColor("#3498db"))
+            btnMeal.setTextColor(Color.WHITE)
+
+            btnDrinks.setBackgroundColor(Color.parseColor("#3498db"))
+            btnDrinks.setTextColor(Color.WHITE)
+        }
+
+
+
+
+        menuRecyclerView.adapter = MenuListAdapter(menuArrayList, txttableType, txtTableNum, orderList)
         getData()
 
 
     }
 
+    private fun getData() {
+        dbref = FirebaseFirestore.getInstance()
+        dbref.collection("meals").addSnapshotListener(object: EventListener<QuerySnapshot>{
+            override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
+                if(p1 != null){
+                    Log.e("Firestore Error", p1.message.toString())
+                    return
+                }
+                for(dc: DocumentChange in p0?.documentChanges!!){
+                    if(dc.type == DocumentChange.Type.ADDED){
+
+                        menuArrayList.add(dc.document.toObject(menu_meal::class.java))
+                    }
+                }
+
+                menuRecyclerView.adapter!!.notifyDataSetChanged()
+
+
+            }
+
+        })
+    }
 
 
     private fun openCartDialog(){
@@ -93,53 +177,14 @@ class TakeOrderFragment(table: TextView) : Fragment() {
             Toast.makeText(context, "ORDER SUCCESS", Toast.LENGTH_SHORT).show()
 
             var table:String = currentTable.text.toString()
-            dbref= FirebaseDatabase.getInstance().getReference("Orders").child(table)
+            /*dbref= FirebaseDatabase.getInstance().getReference("Orders").child(table)
 
             dbref.setValue(orderList)
             dialog.dismiss()
             orderList.clear()
-
+*/
         }
 
-    }
-    private fun getData() {
-        dbref = FirebaseDatabase.getInstance().getReference("meals")
-
-        dbref.addValueEventListener(object: ValueEventListener, MenuListAdapter.OnItemClickListner{
-            override fun onDataChange(p0: DataSnapshot) {
-
-
-                if(p0.exists()){
-                    menuArrayList.clear();
-                    for(mealSnapshot in p0.children){
-                        val meal = mealSnapshot.getValue(menu_meal::class.java)
-                        menuArrayList.add(meal!!)
-                    }
-
-                    menuRecyclerView.adapter = MenuListAdapter(menuArrayList, this)
-                }
-            }
-
-            override fun onCancelled(p0: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onItemClick(position: Int) {
-
-
-                var currentItem = menuArrayList[position]
-
-                var name = currentItem.MealName
-                var price = currentItem.Price
-                var status = currentItem.Status
-
-                if(status != false){
-                    showTakeOrderDialog(name!!, price!!);
-                }
-
-
-            }
-        })
     }
 
     private fun showTakeOrderDialog(food_name: String, food_price: Long) {
@@ -195,7 +240,7 @@ class TakeOrderFragment(table: TextView) : Fragment() {
             var price = (food_price)
             var qty = Integer.parseInt(quantity.text.toString())
 
-           orderList.add(DataCartList(Integer.parseInt(currentTable.text.toString()),name,price,qty,(price*qty)))
+         // orderList.add(DataCartList(Integer.parseInt(currentTable.text.toString()),name,price,qty,(price*qty)))
 
             dialog.dismiss()
 

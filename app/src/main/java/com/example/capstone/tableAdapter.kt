@@ -67,7 +67,7 @@ class tableAdapter(
             val activity = it.context as AppCompatActivity
 
             activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, TakeOrderFragment(holder.tableNum)).commitNow()
+                .replace(R.id.fragment_container, TakeOrderFragment(holder.tableNum, holder.tableType)).commitNow()
 
         }
 

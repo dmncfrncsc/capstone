@@ -34,12 +34,13 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="10dp"
                 />
+
             <TextView
-                android:layout_marginStart="20dp"
                 android:id="@+id/tableType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
                 android:text="TYPE"
                 android:textColor="@color/black"
                 android:textSize="26sp" />
@@ -51,14 +52,16 @@
                 android:layout_gravity="end"
                 android:gravity="end"
                 android:layout_marginEnd="30dp">
+
                 <TextView
                     android:id="@+id/poundSign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="#"
                     android:textColor="@color/black"
-                    android:textSize="26sp"
-                    android:layout_gravity="center_vertical"/>
+                    android:textSize="26sp" />
+
                 <TextView
                     android:id="@+id/tvTableNum"
                     android:layout_width="wrap_content"
@@ -67,7 +70,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="#"
                     android:textColor="@color/black"
-                    android:textSize="26sp"/>
+                    android:textSize="26sp" />
             </LinearLayout>
 
 
@@ -77,7 +80,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/table_items_bg"
-        android:backgroundTint="#000000"
+        android:backgroundTint="#2c3e50"
         android:id="@+id/expandOption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,20 +95,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:background="@drawable/shape_button_rounded"
+            android:background="@drawable/options_bg"
             android:text="TAKE ORDER"
             app:layout_constraintBottom_toTopOf="@id/btnTakeOrder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnViewCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:background="@drawable/shape_button_rounded"
+            android:background="@drawable/options_bg"
             android:text="VIEW CART"
             app:layout_constraintBottom_toTopOf="@id/btnTransferTable"
             app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:background="@drawable/shape_button_rounded"
+            android:background="@drawable/options_bg"
             android:text="TRANSFER TABLE"
             app:layout_constraintBottom_toTopOf="@id/btnRequestBill"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,8 +132,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/shape_button_rounded"
-            android:text="VIEW CART"
+            android:background="@drawable/options_bg"
+            android:text="VIEW ORDERS"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_menu -> {supportFragmentManager.beginTransaction().
             replace(R.id.fragment_container, HomeMenuFragment()).commit()
                 tool = findViewById(R.id.toolbar)
-                tool.title="Available Menu"
+                tool.title="TRANOS"
             }
 
             R.id.nav_select_table -> {

@@ -5,19 +5,30 @@
       <map>
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable-v24/white_border_shape_button_rounded.xml" value="0.1945" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/addbtn.xml" value="0.2205" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/blue_button_bg.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/cardbackground.xml" value="0.2205" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/category_bg.xml" value="0.2235" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/category_selected_bg.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/closebtn.xml" value="0.2205" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/floating_button_background.xml" value="0.347" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/green_button_bg.xml" value="0.347" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/img_cart.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/lessbtn.xml" value="0.2205" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/meal_options_bg.xml" value="0.2575" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/options_bg.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/select_table_spinner_background.xml" value="0.2895" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/shape_button_rounded.xml" value="0.1945" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/subtract_img.xml" value="0.2575" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/table_items_bg.xml" value="0.25" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/table_occupied_bg.xml" value="0.1835" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/take_order_menu_bg.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/white_border_shape_button_rounded.xml" value="0.1945" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/font/carme.xml" value="0.24322916666666666" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/activity_sign_in.xml" value="0.18" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/cart_dialog.xml" value="0.23177083333333334" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/cart_items.xml" value="0.2" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/category_items.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_home_menu.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_menu.xml" value="0.21" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_profile.xml" value="0.1125" />
@@ -31,9 +42,10 @@
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/spinner_availability.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/spinner_status.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/spinner_status_design.xml" value="0.21666666666666667" />
-        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/table_items.xml" value="0.25" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/table_items.xml" value="0.5" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/take_order_dialog.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/take_order_menu_items.xml" value="0.26992753623188404" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/take_order_menu_meal_items.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/menu/drawer_menu.xml" value="0.67" />
       </map>
     </option>

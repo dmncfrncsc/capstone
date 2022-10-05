@@ -1,52 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
+        android:background="@color/white"
         android:orientation="vertical"
         android:weightSum="20"
-        android:background="@color/white">
+        tools:layout_editor_absoluteX="-46dp"
+        tools:layout_editor_absoluteY="4dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0"
-            android:text="AVAILABLE MENU"
-            android:textSize="40dp"
-            android:textColor="@color/black"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/takeOrderMenuList"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="20"
-            android:background="@drawable/white_border_shape_button_rounded"
-            tools:listitem="@layout/home_menu_items" />
+            android:layout_height="120dp"
+            android:background="#3498db"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/viewOrderList"
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txtTableType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/raleway_semibold"
+                        android:text="TableType"
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+
+
+                        android:fontFamily="@font/raleway_semibold"
+                        android:text=" No. "
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
+                    <TextView
+                        android:id="@+id/txtTableNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+
+
+                        android:fontFamily="@font/raleway_semibold"
+                        android:text="##"
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/txtAvailableMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:text="SELECT ORDER"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:contentDescription="Logo"
+                    android:src="@drawable/icon_logo" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0"
-            android:background="@drawable/shape_button_rounded"
-            android:paddingHorizontal="10dp"
-            android:text="VIEW ORDER"
-            android:textSize="20sp"
 
-            />
+            android:orientation="horizontal"
+            android:background="#3498db">
+
+            <Button
+                android:id="@+id/btnMeal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#3498db"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Meal"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnDrinks"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#3498db"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="DRINKS"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btnCombo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#3498db"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="COMBO"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/takeOrderMenuList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/take_order_menu_meal_items" />
+
+
+            <ImageButton
+                android:id="@+id/viewOrderList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/floating_button_background"
+                android:src="@drawable/img_cart"
+                android:elevation="10dp"/>
+
+
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

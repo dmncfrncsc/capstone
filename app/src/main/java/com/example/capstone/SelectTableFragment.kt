@@ -52,6 +52,8 @@ class SelectTableFragment : Fragment() {
 
         txtSelectTable.typeface = typeface
 
+
+
         tableStatusAdapter.setDropDownViewResource(R.layout.spinner_status_design)
         tableTypeAdapter.setDropDownViewResource(R.layout.spinner_status_design)
 

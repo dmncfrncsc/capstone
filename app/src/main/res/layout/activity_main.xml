@@ -19,10 +19,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#00B8D4"
+            android:background="#3498db"
 
-            android:elevation="4dp"
-            app:title="TRANOS" />
+            android:elevation="4dp"/>
 
         <FrameLayout
             android:id="@+id/fragment_container"

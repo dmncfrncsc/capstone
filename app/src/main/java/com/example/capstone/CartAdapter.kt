@@ -17,7 +17,7 @@ class CartAdapter (private val cartList: ArrayList<DataCartList>): RecyclerView.
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = cartList[position]
-        holder.itemName.text = currentItem.MealName
+        holder.itemName.text = currentItem.itemName
         holder.qty.text = currentItem.qty.toString()
         holder.itemView.setBackgroundResource(R.drawable.shape_button_rounded)
     }
