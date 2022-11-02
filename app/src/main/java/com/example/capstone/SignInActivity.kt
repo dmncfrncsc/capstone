@@ -115,7 +115,6 @@ class SignInActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
 
-
                         dbRef.addSnapshotListener(object : EventListener<QuerySnapshot> {
                             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                                 users.clear()

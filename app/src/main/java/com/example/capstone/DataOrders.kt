@@ -18,7 +18,4 @@ data class DataOrders(
         this.tableId = tableId
     }
 
-    fun swapQueueId(queue: String){
-        this.queueID = queue
-    }
 }
