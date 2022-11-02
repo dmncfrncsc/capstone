@@ -3,19 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.356" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable-v24/white_border_shape_button_rounded.xml" value="0.1945" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/add_cart_disabled.xml" value="0.23" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/addbtn.xml" value="0.2205" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/backbtn.xml" value="0.346" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/background_qty.xml" value="0.331" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/blue_button_bg.xml" value="0.347" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/btn_disabled_bg.xml" value="0.2195" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/btnbackimage.xml" value="0.346" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/btncart_cancel_bg.xml" value="0.356" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/btncart_confirm_bg.xml" value="0.355" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/button_meal_options_bg.xml" value="0.356" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/cardbackground.xml" value="0.2205" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/category_bg.xml" value="0.2235" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/category_selected_bg.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/closebtn.xml" value="0.2205" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/floating_button_background.xml" value="0.347" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/floating_button_background_disabled.xml" value="0.356" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/foodpictureplaceholder.xml" value="0.356" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/green_button_bg.xml" value="0.347" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/ic_addtable.xml" value="0.356" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/ic_launcher_background.xml" value="0.356" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/ic_menu.xml" value="0.356" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/icon_check.xml" value="0.356" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/img_cart.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/lessbtn.xml" value="0.2205" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/low_stock_.xml" value="0.216" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/meal_options_bg.xml" value="0.2575" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/options_bg.xml" value="0.347" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/out_of_stock.xml" value="0.216" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/select_table_spinner_background.xml" value="0.2895" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/shape_button_rounded.xml" value="0.1945" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/subtract_img.xml" value="0.2575" />
@@ -24,20 +41,40 @@
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/take_order_menu_bg.xml" value="0.347" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/drawable/white_border_shape_button_rounded.xml" value="0.1945" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/font/carme.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/font/raleway.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/font/raleway_bold.xml" value="0.3848958333333333" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/font/raleway_semibold.xml" value="0.3848958333333333" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/activity_first_time_login.xml" value="0.22" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/activity_sign_in.xml" value="0.18" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/activity_splash_screen.xml" value="0.3546875" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/cart_dialog.xml" value="0.23177083333333334" />
-        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/cart_items.xml" value="0.2" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/cart_fragment.xml" value="0.3536458333333333" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/cart_item.xml" value="0.33" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/cart_items.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/category_items.xml" value="0.3536458333333333" />
-        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_home_menu.xml" value="0.33" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/dialog_remove_yes_no.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/drinks_items.xml" value="0.2125" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/example_toast.xml" value="0.18" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_additional_orders.xml" value="0.21302083333333333" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_cart.xml" value="0.33" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_complete_orders.xml" value="0.33" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_home_menu.xml" value="0.2" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_menu.xml" value="0.21" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_misc.xml" value="0.25" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_order_list.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_profile.xml" value="0.1125" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_select_table.xml" value="0.33" />
-        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_take_order.xml" value="0.26992753623188404" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_table_transfered.xml" value="0.3536458333333333" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_take_order.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_takeorder.xml" value="0.26992753623188404" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_transfer_table.xml" value="0.33" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/fragment_view_orderlist.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/home_menu_items.xml" value="0.26992753623188404" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/menu_items.xml" value="0.25" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/misc_custom_dialogbox.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/nav_header.xml" value="0.1125" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/orders_item.xml" value="0.3546875" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/popup_table_options.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/spinner_availability.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/spinner_status.xml" value="0.3536458333333333" />
@@ -46,7 +83,10 @@
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/take_order_dialog.xml" value="0.33" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/take_order_menu_items.xml" value="0.26992753623188404" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/take_order_menu_meal_items.xml" value="0.33" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/layout/transfer_table_items.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/menu/drawer_menu.xml" value="0.67" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.225" />
+        <entry key="..\:/Users/domin/AndroidStudioProjects/Capstone/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.225" />
       </map>
     </option>
   </component>

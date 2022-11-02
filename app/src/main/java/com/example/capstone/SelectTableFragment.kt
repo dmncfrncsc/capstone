@@ -1,26 +1,28 @@
 package com.example.capstone
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 
 
-class SelectTableFragment : Fragment() {
+class SelectTableFragment(
+) : Fragment() {
     private lateinit var dbref: DatabaseReference
     private lateinit var tableRecyclerView: RecyclerView
     private lateinit var tableArrayList: ArrayList<DataTable>
     lateinit var table: TextView
-
+    private  lateinit var  occupiedTables: ArrayList<Int>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,23 +33,27 @@ class SelectTableFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        occupiedTables = arrayListOf()
         val txtSelectTable: TextView = view.findViewById(R.id.txtSelectTable)
         val tableTypeSpinner: Spinner = view.findViewById(R.id.dropdown_Type)
         val tableStatusSpinner: Spinner = view.findViewById(R.id.statusDropDown)
-
+        val btnBack: ImageButton = view.findViewById(R.id.btnBack)
         val tableTypeAdapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.Type,
             R.layout.spinner_status_design
         )
+
         val tableStatusAdapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.Availability,
             R.layout.spinner_status_design
         )
 
-
+        btnBack.setOnClickListener {
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
+        }
         val typeface: Typeface = Typeface.createFromAsset(requireActivity().assets, "carbon bl.ttf")
 
         txtSelectTable.typeface = typeface
@@ -77,6 +83,7 @@ class SelectTableFragment : Fragment() {
 
         var status: Boolean? = null
         var type: String? = null
+
         tableStatusSpinner.onItemSelectedListener = (object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                var selectedType:String = tableStatusSpinner.selectedItem.toString()
@@ -124,9 +131,13 @@ class SelectTableFragment : Fragment() {
             }
 
         })
+
+
+
     }
 
     private fun getTableList(selectedType: String?, status: Boolean?) {
+
         dbref = FirebaseDatabase.getInstance().getReference("Dine").child("Tables")
         dbref.addValueEventListener(object : ValueEventListener/*,
             tableAdapter.OnItemClickListener */ {
@@ -141,19 +152,15 @@ class SelectTableFragment : Fragment() {
                         }
                         if((selectedType.equals(null) && table!!.Status == status) ||
                             (table!!.Category.equals(selectedType) && status == null)){
-                            tableArrayList.add(table!!)
+                            tableArrayList.add(table)
                         }
                         if(table!!.Category.equals(selectedType) && table!!.Status== status){
-                            tableArrayList.add(table!!)
+                            tableArrayList.add(table)
                         }
 
                     }
-
                 }
-                tableArrayList.forEach{
-                    Log.d("test", it.id.toString()+ " " +it.Status.toString())
-                }
-                tableRecyclerView.adapter = tableAdapter(tableArrayList/*,this*/)
+                tableRecyclerView.adapter = SelectTableAdapter(tableArrayList/*,this*/)
 
 
             }
@@ -186,6 +193,7 @@ class SelectTableFragment : Fragment() {
          }
          dialog.show()
      }*/
+
 
 
 }

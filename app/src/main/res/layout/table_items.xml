@@ -103,12 +103,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnViewCart"
+            android:id="@+id/btnViewOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:background="@drawable/options_bg"
-            android:text="VIEW CART"
+            android:text="VIEW ORDERS"
             app:layout_constraintBottom_toTopOf="@id/btnTransferTable"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,23 +121,13 @@
             android:layout_marginTop="1dp"
             android:background="@drawable/options_bg"
             android:text="TRANSFER TABLE"
-            app:layout_constraintBottom_toTopOf="@id/btnRequestBill"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnViewCart" />
 
-        <Button
-            android:id="@+id/btnRequestBill"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/options_bg"
-            android:text="VIEW ORDERS"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnTransferTable" />
+            app:layout_constraintTop_toBottomOf="@id/btnViewOrders"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
