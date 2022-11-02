@@ -59,12 +59,13 @@ class FirstTimeLogin : AppCompatActivity() {
                                                 "Successfully changed password.",
                                                 Toast.LENGTH_SHORT
                                             ).show()
-
+                                            mAuth.signOut()
                                             val i = Intent(
                                                 applicationContext,
                                                 SignInActivity::class.java
                                             )
                                             startActivity(i)
+
                                         }else{
                                             Toast.makeText(
                                                 this,

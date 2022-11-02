@@ -82,6 +82,8 @@ class MenuListMealAdapter(
                 qty += 1
                 holder.txtQty.text = qty.toString()
                 holder.stock.text = (currentItem.Serving!! - qty).toString()
+            }else{
+                Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -154,7 +156,7 @@ class MenuListMealAdapter(
                         DataCartList(
                             currentItem.ItemCode!!,
                             txtNum,
-                            itemName, price, qty, subtotal, "meal" ,status,false, imageUrl
+                            itemName, price, qty, subtotal, "meal" ,status,false, imageUrl, Integer.parseInt(price.toString())
                         )
                     )
                     dbRef.collection("meals")

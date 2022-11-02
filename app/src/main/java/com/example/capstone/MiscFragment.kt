@@ -88,7 +88,8 @@ class MiscFragment(
                                             estName, price, qtys, subtotal, "misc",
                                             status = false,
                                             isBucket = false,
-                                            ImageUrl = ""
+                                            ImageUrl = "",
+                                            Integer.parseInt(price.toString())
                                         )
                                     )
                                 }

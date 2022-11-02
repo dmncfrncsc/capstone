@@ -77,7 +77,7 @@ class CartAdapter(
 
         holder.btnAdd.setOnClickListener {
             var currentQty = Integer.parseInt(holder.txtQty.text.toString())
-
+            var discount = currentQty * 20
             if (currentItem.category.equals("beverages", ignoreCase = true)) {
 
                 if (currentItem.isBucket) {
@@ -112,6 +112,8 @@ class CartAdapter(
                             }
                         }
 
+                    }else{
+                        Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else {
@@ -144,6 +146,9 @@ class CartAdapter(
                                     }
                             }
                         }
+                    }
+                    else{
+                        Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -184,6 +189,8 @@ class CartAdapter(
                         }
                     }
 
+                }else{
+                    Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                 }
             }
 

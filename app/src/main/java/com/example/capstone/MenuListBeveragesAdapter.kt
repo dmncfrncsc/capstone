@@ -94,7 +94,7 @@ class MenuListBeveragesAdapter(
                         o.isSolo(false)
                         o.newOldPrice(o.Price!!)
                         o.newOldQty(o.Quantity!!)
-                        o.editPrice(o.Price!! * 6)
+                        o.editPrice((o.Price!! * 6)-20)
                         o.editQuantity(o.Quantity!! / 6)
                     }
                 }
@@ -173,17 +173,31 @@ class MenuListBeveragesAdapter(
                     ).show()
 
                 } else {
+                    if(current.Quantity!! !=0){
+                        if (current.Quantity!! > Integer.parseInt(holder.txtQty.text.toString())) {
+                            qty += 1
+                            holder.txtQty.text = qty.toString()
+                            holder.stock.text = (current.Quantity!! - qty).toString()
+                        }else{
+                            Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }else{
+                        Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            else {
+                if(current.Quantity!! !=0){
                     if (current.Quantity!! > Integer.parseInt(holder.txtQty.text.toString())) {
                         qty += 1
                         holder.txtQty.text = qty.toString()
                         holder.stock.text = (current.Quantity!! - qty).toString()
+                    }else{
+                        Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                     }
-                }
-            } else {
-                if (current.Quantity!! > Integer.parseInt(holder.txtQty.text.toString())) {
-                    qty += 1
-                    holder.txtQty.text = qty.toString()
-                    holder.stock.text = (current.Quantity!! - qty).toString()
+                }else{
+                    Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -258,7 +272,9 @@ class MenuListBeveragesAdapter(
                                 DataCartList(
                                     current.ItemCode!!,
                                     txtNum,
-                                    soloName, price, qty, subtotal, "beverages", status, false,imageUrl
+                                    soloName, price, qty, subtotal, "beverages", status, false,imageUrl, Integer.parseInt(
+                                        current.oldPrice.toString()
+                                    )
                                 )
 
                             )
@@ -304,7 +320,9 @@ class MenuListBeveragesAdapter(
                                 DataCartList(
                                     current.ItemCode!!,
                                     txtNum,
-                                    bucketName, price, qty, subtotal, "beverages", status, true,imageUrl
+                                    bucketName, price, qty, subtotal, "beverages", status, true,imageUrl, Integer.parseInt(
+                                        current.oldPrice.toString()
+                                    ) * 6
                                 )
                             )
 
@@ -355,7 +373,7 @@ class MenuListBeveragesAdapter(
                             DataCartList(
                                 current.ItemCode!!,
                                 txtNum,
-                                itemName, price, qty, subtotal, "beverages", status, false, imageUrl
+                                itemName, price, qty, subtotal, "beverages", status, false, imageUrl, current.oldPrice!!
                             )
                         )
                         dbRef.collection("beverages")

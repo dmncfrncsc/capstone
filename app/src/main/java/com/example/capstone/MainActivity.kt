@@ -3,6 +3,7 @@ package com.example.capstone
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,15 @@ import java.util.*
 class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val auth = Firebase.auth
+        if(auth.currentUser == null){
+            auth.signOut()
+            val i = Intent(
+                applicationContext,
+                SignInActivity::class.java
+            )
+            startActivity(i)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val btnOrder = findViewById<Button>(R.id.btnStartOrder)
@@ -40,7 +50,7 @@ class MainActivity : AppCompatActivity(){
                 DialogInterface.OnClickListener { dialog, which ->
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
-                            var  auth = Firebase.auth
+
                             auth.signOut()
                             val i = Intent(
                                 applicationContext,

@@ -20,7 +20,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
+import com.google.firebase.ktx.Firebase
 import java.text.DecimalFormat
 
 
@@ -50,7 +52,8 @@ class TakeOrderFragment(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        val auth = Firebase.auth.currentUser
+        Log.d("current user", auth!!.email.toString())
         menuClicked = MenuClicked()
         super.onViewCreated(view, savedInstanceState)
         val txttableType: TextView = view.findViewById(R.id.txtTableType)
@@ -234,7 +237,8 @@ class TakeOrderFragment(
                                                 estName, price, qtys, subtotal, "misc",
                                                 status = false,
                                                 isBucket = false,
-                                                ImageUrl = ""
+                                                ImageUrl = "",
+                                                Integer.parseInt(price.toString())
                                             )
                                         )
                                         myDialog.cancel()
