@@ -156,7 +156,7 @@ class MenuListMealAdapter(
                         DataCartList(
                             currentItem.ItemCode!!,
                             txtNum,
-                            itemName, price, qty, subtotal, "meal" ,status,false, imageUrl, Integer.parseInt(price.toString())
+                            itemName, price, qty, subtotal, "meal" ,status,false, imageUrl
                         )
                     )
                     dbRef.collection("meals")

@@ -115,7 +115,7 @@ class MenuListBeveragesAdapter(
                     o.isSolo(true)
                 }
             }
-            notifyItemChanged(position)
+           notifyItemChanged(position)
         }
 
 
@@ -272,9 +272,7 @@ class MenuListBeveragesAdapter(
                                 DataCartList(
                                     current.ItemCode!!,
                                     txtNum,
-                                    soloName, price, qty, subtotal, "beverages", status, false,imageUrl, Integer.parseInt(
-                                        current.oldPrice.toString()
-                                    )
+                                    soloName, price, qty, subtotal, "beverages", status, false,imageUrl
                                 )
 
                             )
@@ -320,9 +318,7 @@ class MenuListBeveragesAdapter(
                                 DataCartList(
                                     current.ItemCode!!,
                                     txtNum,
-                                    bucketName, price, qty, subtotal, "beverages", status, true,imageUrl, Integer.parseInt(
-                                        current.oldPrice.toString()
-                                    ) * 6
+                                    bucketName, price, qty, subtotal, "beverages", status, true,imageUrl
                                 )
                             )
 
@@ -337,11 +333,11 @@ class MenuListBeveragesAdapter(
                                         )
                                     }
                                 }
-                            notifyItemChanged(position)
+                           // notifyItemChanged(position)
                         }
                     }
                 }
-                notifyItemChanged(position)
+               // notifyItemChanged(position)
             }
             else {
                 if (qtys == 0) {
@@ -373,7 +369,7 @@ class MenuListBeveragesAdapter(
                             DataCartList(
                                 current.ItemCode!!,
                                 txtNum,
-                                itemName, price, qty, subtotal, "beverages", status, false, imageUrl, current.oldPrice!!
+                                itemName, price, qty, subtotal, "beverages", status, false, imageUrl
                             )
                         )
                         dbRef.collection("beverages")
@@ -387,7 +383,7 @@ class MenuListBeveragesAdapter(
                         Toast.makeText(holder.itemView.context, "${current.BeverageName} added.", Toast.LENGTH_SHORT).show()
                     }
                 }
-                notifyItemChanged(position)
+              //  notifyItemChanged(position)
             }
 
 

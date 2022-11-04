@@ -477,80 +477,84 @@ class CartAdapter(
         }
 
         btnConfirmOrders.setOnClickListener {
-            getTableData()
-            val dbReference =
-                dbRef.whereEqualTo("tableId", Integer.parseInt(tableNum.text.toString()))
-            val tsLong = System.currentTimeMillis() / 1000
-            val ts = tsLong.toString()
-            val queue: DataQueue = DataQueue()
+            if(cartList.size !=0){
+                getTableData()
+                val dbReference =
+                    dbRef.whereEqualTo("tableId", Integer.parseInt(tableNum.text.toString()))
+                val tsLong = System.currentTimeMillis() / 1000
+                val ts = tsLong.toString()
+                val queue: DataQueue = DataQueue()
 
-            queue.CreateTableId(Integer.parseInt(tableNum.text.toString()))
-            queue.CreateTimeStamp(ts)
+                queue.CreateTableId(Integer.parseInt(tableNum.text.toString()))
+                queue.CreateTimeStamp(ts)
 
-            val db = FirebaseFirestore.getInstance()
-            val docData = hashMapOf(
-                "tableId" to queue.tableId,
-                "timeStamp" to queue.timeStamp.toString().toLong(),
-                "status" to "preparing"
-            )
-            val ref: DocumentReference = db.collection("orderQueue").document()
-            val docId = ref.id
+                val db = FirebaseFirestore.getInstance()
+                val docData = hashMapOf(
+                    "tableId" to queue.tableId,
+                    "timeStamp" to queue.timeStamp.toString().toLong(),
+                    "status" to "preparing"
+                )
+                val ref: DocumentReference = db.collection("orderQueue").document()
+                val docId = ref.id
 
-            val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
-                when (which) {
-                    DialogInterface.BUTTON_POSITIVE -> {
-                        updateTableData()
-                        db.collection("orderQueue").document(docId).set(docData)
-                        for (o in cartList) {
+                val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+                            updateTableData()
+                            db.collection("orderQueue").document(docId).set(docData)
+                            for (o in cartList) {
 
-                            if(o.category.equals("meal",ignoreCase = true) || o.category.equals("beverages",ignoreCase = true)){
-                                val cart = DataOrders(
-                                    o.TableId,
-                                    o.ItemName,
-                                    o.price,
-                                    o.quantity,
-                                    o.subTotal,
-                                    docId,
-                                    false,
-                                    "order",
-                                    o.ImageUrl,
-                                    o.isBucket
-                                )
-                                dbRef.document().set(cart)
+                                if(o.category.equals("meal",ignoreCase = true) || o.category.equals("beverages",ignoreCase = true)){
+                                    val cart = DataOrders(
+                                        o.TableId,
+                                        o.ItemName,
+                                        o.price,
+                                        o.quantity,
+                                        o.subTotal,
+                                        docId,
+                                        false,
+                                        "order",
+                                        o.ImageUrl,
+                                        o.isBucket
+                                    )
+                                    dbRef.document().set(cart)
+                                }
+                                else{
+                                    val cart = DataOrders(
+                                        o.TableId,
+                                        o.ItemName,
+                                        o.price,
+                                        o.quantity,
+                                        o.subTotal,
+                                        docId,
+                                        false,
+                                        "misc",
+                                        o.ImageUrl,
+                                        o.isBucket
+                                    )
+                                    dbRef.document().set(cart)
+                                }
+
+
                             }
-                            else{
-                                val cart = DataOrders(
-                                    o.TableId,
-                                    o.ItemName,
-                                    o.price,
-                                    o.quantity,
-                                    o.subTotal,
-                                    docId,
-                                    false,
-                                    "misc",
-                                    o.ImageUrl,
-                                    o.isBucket
-                                )
-                                dbRef.document().set(cart)
-                            }
 
-
+                            cartList.clear()
+                            val activity = it.context as AppCompatActivity
+                            activity.supportFragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, OrdersCompleteFragment())
+                                .commitNow()
                         }
+                        DialogInterface.BUTTON_NEGATIVE -> {}
 
-                        cartList.clear()
-                        val activity = it.context as AppCompatActivity
-                        activity.supportFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, OrdersCompleteFragment())
-                            .commitNow()
                     }
-                    DialogInterface.BUTTON_NEGATIVE -> {}
-
                 }
+                val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
+                val show = builder.setMessage("Confirm Orders?")
+                    .setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show()
+            }else{
+                Toast.makeText(holder.itemView.context, "Empty orders", Toast.LENGTH_SHORT).show()
             }
-            val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
-            val show = builder.setMessage("Confirm Orders?")
-                .setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show()
 
 
 //            if (currentActivity!!.javaClass.toString() == OrderListFragment(

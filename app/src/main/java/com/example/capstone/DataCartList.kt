@@ -10,8 +10,7 @@ data class DataCartList(
     var category: String,
     val status: Boolean,
     val isBucket: Boolean,
-    val ImageUrl: String,
-    val basePrice: Int
+    val ImageUrl: String
 ) {
     fun editQty(currentQty: Int) {
         this.quantity = this.quantity + currentQty
