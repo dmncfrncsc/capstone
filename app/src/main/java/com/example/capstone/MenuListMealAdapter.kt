@@ -1,8 +1,6 @@
 package com.example.capstone
 
 import android.graphics.Color
-import android.opengl.Visibility
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +29,6 @@ class MenuListMealAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
         if(orderList.size >0){
             btnViewOrderList.isEnabled = true
             btnViewOrderList.setBackgroundResource(R.drawable.floating_button_background)
@@ -42,8 +39,6 @@ class MenuListMealAdapter(
         val currentItem = menuList[position]
 
         val servings = Integer.parseInt(currentItem.Serving.toString())
-
-
         if(servings == 0){
             holder.linearCategory.visibility = View.GONE
             holder.itemView.setBackgroundResource(R.drawable.out_of_stock)
@@ -69,14 +64,10 @@ class MenuListMealAdapter(
         holder.itemName.text = currentItem.MealName
         holder.price.text = currentItem.Price.toString()
         holder.stock.text = currentItem.Serving.toString()
-
-
-
         if (currentItem.ImageUrl.toString() != "null") {
             Picasso.with(holder.itemView.context).load(currentItem.ImageUrl).fit().into(holder.orderImage)
 
         }
-
         holder.btnAddQty.setOnClickListener {
             if (currentItem.Serving!! > Integer.parseInt(holder.txtQty.text.toString())) {
                 qty += 1
@@ -86,7 +77,6 @@ class MenuListMealAdapter(
                 Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
             }
         }
-
         holder.btnSubtract.setOnClickListener {
             if (qty > 0) {
                 qty -= 1
@@ -94,10 +84,6 @@ class MenuListMealAdapter(
                 holder.stock.text = (currentItem.Serving!! - qty).toString()
             }
         }
-
-
-
-
         fun checkExistingItem(name: String): Boolean {
             for (i in orderList) {
                 if (i.ItemName == name) {
@@ -106,14 +92,12 @@ class MenuListMealAdapter(
             }
             return false
         }
-
         holder.btnAddCart.setOnClickListener {
             var imageUrl: String = if(currentItem.ImageUrl == null || currentItem.ImageUrl == ""){
                 ""
             }else{
                 currentItem.ImageUrl!!
             }
-
             val dbRef = FirebaseFirestore.getInstance()
             val price = currentItem.Price.toString().toLong()
             val itemName = currentItem.MealName.toString()
@@ -143,13 +127,8 @@ class MenuListMealAdapter(
                                     }
                                 }
                             Toast.makeText(holder.itemView.context, "${currentItem.MealName} added.", Toast.LENGTH_SHORT).show()
-
                         }
-
                     }
-
-                  //  notifyItemChanged(position)
-
                 }
                 else{
                     orderList.add(
@@ -171,18 +150,12 @@ class MenuListMealAdapter(
                         }
 
                     Toast.makeText(holder.itemView.context, "${currentItem.MealName} added.", Toast.LENGTH_SHORT).show()
-                   // notifyItemChanged(position)
                 }
             }
-
-
-
         }
         btnViewOrderList.setOnClickListener {
             if(btnViewOrderList.isEnabled){
-
                 val activity = it.context as AppCompatActivity
-
                 activity.supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, CartFragment(
                         orderList,
@@ -192,8 +165,6 @@ class MenuListMealAdapter(
                     )).commitNow()
             }
         }
-
-
     }
 
     override fun getItemCount(): Int {

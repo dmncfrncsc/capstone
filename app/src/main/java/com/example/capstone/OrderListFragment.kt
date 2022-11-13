@@ -16,8 +16,6 @@ import com.google.firebase.firestore.*
 class OrderListFragment(private var tableNums: TextView, private var tableTypes: TextView) : Fragment() {
     private lateinit var orderList: ArrayList<DataOrders>
     private lateinit var orderRecylcerView: RecyclerView
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,22 +25,18 @@ class OrderListFragment(private var tableNums: TextView, private var tableTypes:
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
         val tableType: TextView = view.findViewById(R.id.txtTableTypeOrder)
         val tableNum:TextView = view.findViewById(R.id.txtTableNumOrder)
         val total: TextView = view.findViewById(R.id.txtTotalPrice)
         tableType.text = tableTypes.text.toString()
         tableNum.text = tableNums.text.toString()
-
         val btnCancel: Button = view.findViewById(R.id.btnBackCancel)
         val btnAddOrders: Button = view.findViewById(R.id.btnAddOrders)
-
         val layoutManger = LinearLayoutManager(context)
         orderRecylcerView = view.findViewById(R.id.orderListRecyclerview)
         orderRecylcerView.layoutManager = layoutManger
         orderList = arrayListOf()
-
         val arrayList = arrayListOf<DataCartList>()
         btnCancel.setOnClickListener{
             val activity = it.context as AppCompatActivity
@@ -50,7 +44,6 @@ class OrderListFragment(private var tableNums: TextView, private var tableTypes:
                 .replace(R.id.fragment_container, SelectTableFragment())
                 .commitNow()
         }
-
         btnAddOrders.setOnClickListener{
             val activity = it.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()
@@ -62,15 +55,12 @@ class OrderListFragment(private var tableNums: TextView, private var tableTypes:
                 ))
                 .commitNow()
         }
-
         getOrderList(btnCancel,btnAddOrders,total )
 
     }
 
     private fun getOrderList(btnCancel: Button, btnAddOrders: Button, total: TextView) {
         val dbrefs = FirebaseFirestore.getInstance()
-
-
         dbrefs.collection("orders").addSnapshotListener(object: EventListener<QuerySnapshot>{
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                 if (error != null) {
@@ -89,7 +79,6 @@ class OrderListFragment(private var tableNums: TextView, private var tableTypes:
                             }
                         }
                         orderRecylcerView.adapter = OrderListAdapter(orderList, btnAddOrders, total )
-
                     }
                     if(dc.type == DocumentChange.Type.MODIFIED){
                         for (i in orderList) {
@@ -100,20 +89,14 @@ class OrderListFragment(private var tableNums: TextView, private var tableTypes:
                                     index = orderList.indexOf(i)
                                 }
                                 if (obj != null) {
-
                                     orderList[index as Int] = data
                                 }
                             }
-
                         }
                     }
-
                 }
-
                 orderRecylcerView.adapter = OrderListAdapter(orderList, btnAddOrders, total )
             }
-
         })
-
     }
 }

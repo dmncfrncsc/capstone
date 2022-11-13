@@ -5,6 +5,4 @@ data class QueueSwap(
     var timeStamp: Int? = null,
     val status: String? = null,
 
-) {
-
-}
+)

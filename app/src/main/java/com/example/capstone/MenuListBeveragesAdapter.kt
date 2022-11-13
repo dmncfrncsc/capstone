@@ -100,10 +100,7 @@ class MenuListBeveragesAdapter(
                 }
                 notifyItemChanged(position)
             }
-
-
         }
-
         holder.btnSolo.setOnClickListener {
             for (o in menuList) {
                 if (o.BeverageName == current.BeverageName) {
@@ -117,8 +114,6 @@ class MenuListBeveragesAdapter(
             }
            notifyItemChanged(position)
         }
-
-
         holder.txtQty.text = "0"
         var extraName: String? = null
         var qty = Integer.parseInt(holder.txtQty.text.toString())
@@ -131,11 +126,7 @@ class MenuListBeveragesAdapter(
             "${current.BeverageName.toString()} $extraName"
         holder.price.text = current.Price.toString()
         holder.stock.text = current.Quantity.toString()
-
-
         holder.btnAddCart.isEnabled = (Integer.parseInt(holder.txtQty.text.toString()) <= 0)
-
-
         fun checkExistingItem(name: String): Boolean {
             for (i in orderList) {
                 if (i.ItemName == name) {
@@ -144,12 +135,9 @@ class MenuListBeveragesAdapter(
             }
             return false
         }
-
         btnViewOrderList.setOnClickListener {
             if (btnViewOrderList.isEnabled) {
-
                 val activity = it.context as AppCompatActivity
-
                 activity.supportFragmentManager.beginTransaction()
                     .replace(
                         R.id.fragment_container, CartFragment(
@@ -161,8 +149,6 @@ class MenuListBeveragesAdapter(
                     ).commitNow()
             }
         }
-
-
         holder.btnAddQty.setOnClickListener {
             if (current.Bucket) {
                 if (!current.isSoloSelected && !current.isBucketSelected) {
@@ -171,7 +157,6 @@ class MenuListBeveragesAdapter(
                         "Please select variation",
                         Toast.LENGTH_SHORT
                     ).show()
-
                 } else {
                     if(current.Quantity!! !=0){
                         if (current.Quantity!! > Integer.parseInt(holder.txtQty.text.toString())) {
@@ -181,7 +166,6 @@ class MenuListBeveragesAdapter(
                         }else{
                             Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                         }
-
                     }else{
                         Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                     }
@@ -200,29 +184,21 @@ class MenuListBeveragesAdapter(
                     Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
-
         holder.btnSubtract.setOnClickListener {
-
             if (qty > 0) {
                 qty -= 1
                 holder.txtQty.text = qty.toString()
                 holder.stock.text = (current.Quantity!! - qty).toString()
             }
-
-
         }
-
         holder.btnAddCart.setOnClickListener {
             var imageUrl: String = ""
-
             imageUrl = if(current.ImageUrl == null || current.ImageUrl == ""){
                 ""
             }else{
                 current.ImageUrl!!
             }
-
             val dbRef = FirebaseFirestore.getInstance()
             val txtNum = Integer.parseInt(tableNum.text.toString())
             val price = current.Price.toString().toLong()
@@ -266,7 +242,6 @@ class MenuListBeveragesAdapter(
                                     Toast.makeText(holder.itemView.context, "$soloName added.", Toast.LENGTH_SHORT).show()
                                 }
                             }
-
                         } else {
                             orderList.add(
                                 DataCartList(
@@ -274,10 +249,7 @@ class MenuListBeveragesAdapter(
                                     txtNum,
                                     soloName, price, qty, subtotal, "beverages", status, false,imageUrl
                                 )
-
                             )
-
-
                             val dbRefs = FirebaseFirestore.getInstance()
                             dbRefs.collection("beverages")
                                 .whereEqualTo("BeverageName", current.BeverageName).get()
@@ -285,12 +257,10 @@ class MenuListBeveragesAdapter(
                                     for (docs in result) {
                                         docs.reference.update("Quantity", current.Quantity!! - qtys)
                                     }
-
                                 }
                             Toast.makeText(holder.itemView.context, "$soloName added.", Toast.LENGTH_SHORT).show()
                         }
                     }
-
                     if (current.isBucketSelected) {
                         val dbRef = FirebaseFirestore.getInstance()
                         val bucketName = "B. $itemName"
@@ -309,10 +279,8 @@ class MenuListBeveragesAdapter(
                                                 )
                                             }
                                         }
-
                                 }
                             }
-
                         } else {
                             orderList.add(
                                 DataCartList(
@@ -321,7 +289,6 @@ class MenuListBeveragesAdapter(
                                     bucketName, price, qty, subtotal, "beverages", status, true,imageUrl
                                 )
                             )
-
                             val dbRef = FirebaseFirestore.getInstance()
                             dbRef.collection("beverages")
                                 .whereEqualTo("BeverageName", current.BeverageName).get()
@@ -333,11 +300,9 @@ class MenuListBeveragesAdapter(
                                         )
                                     }
                                 }
-                           // notifyItemChanged(position)
                         }
                     }
                 }
-               // notifyItemChanged(position)
             }
             else {
                 if (qtys == 0) {
@@ -383,71 +348,13 @@ class MenuListBeveragesAdapter(
                         Toast.makeText(holder.itemView.context, "${current.BeverageName} added.", Toast.LENGTH_SHORT).show()
                     }
                 }
-              //  notifyItemChanged(position)
             }
-
-
         }
-
-
-//        holder.btnSolo.setOnClickListener{
-//            if(holder.btnSolo.isEnabled){
-//                holder.btnSolo.isEnabled = false
-//                holder.btnSolo.setBackgroundResource(R.drawable.btn_disabled_bg)
-//                holder.btnSolo.setTextColor(Color.parseColor("#FFFFFF"))
-//                holder.price.text = oldPrice.toString()
-//                holder.stock.text = oldQty.toString()
-//                for(o in menuList){
-//                    if(o.BeverageName == currentItem.BeverageName){
-//                        o.editPrice(oldPrice!!)
-//                        o.editQuantity(oldQty!!)
-//                    }
-//                }
-//                if(Integer.parseInt(holder.stock.text.toString()) < 6){
-//                    holder.btnBucket.isEnabled = false
-//                    holder.btnBucket.setBackgroundResource(R.drawable.btn_disabled_bg)
-//                }else{
-//                    holder.btnBucket.isEnabled = true
-//                    holder.btnBucket.setBackgroundResource(R.drawable.btncart_confirm_bg)
-//                }
-//            }
-//        }
-//
-//        holder.btnBucket.setOnClickListener{
-//           if(holder.btnBucket.isEnabled){
-//               holder.btnBucket.setTextColor(Color.parseColor("#FFFFFF"))
-//               if(Integer.parseInt(holder.stock.text.toString()) < 6){
-//                   Toast.makeText(holder.itemView.context,"Not enough stock", Toast.LENGTH_SHORT).show()
-//
-//               }else{
-//
-//                   oldPrice = Integer.parseInt(holder.price.text.toString())
-//                   holder.price.text = (oldPrice!! * bucketQuantity).toString()
-//                   oldQty = Integer.parseInt(holder.stock.text.toString())
-//
-//                   holder.stock.text = (oldQty!! / bucketQuantity).toString()
-//                   for(o in menuList){
-//                       if(o.BeverageName == currentItem.BeverageName){
-//                           o.editPrice(oldPrice!! * bucketQuantity)
-//                           o.editQuantity(oldQty!! / bucketQuantity)
-//                       }
-//                   }
-//                   holder.btnBucket.isEnabled = false
-//                   holder.btnBucket.setBackgroundResource(R.drawable.btn_disabled_bg)
-//                   holder.btnSolo.isEnabled = true
-//                   holder.btnSolo.setBackgroundResource(R.drawable.btncart_confirm_bg)
-//               }
-//           }
-//        }
-
-
     }
-
 
     override fun getItemCount(): Int {
         return menuList.size
     }
-
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemName: TextView = itemView.findViewById(R.id.tvItemName)
         val price: TextView = itemView.findViewById(R.id.tvPrice)
@@ -465,6 +372,4 @@ class MenuListBeveragesAdapter(
         val linearLay: LinearLayout = itemView.findViewById(R.id.linearLay)
         val tvWarning: TextView = itemView.findViewById(R.id.tvWarning)
     }
-
-
 }

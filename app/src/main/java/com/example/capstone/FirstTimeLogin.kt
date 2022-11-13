@@ -1,6 +1,4 @@
 package com.example.capstone
-
-
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -14,19 +12,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
-
 class FirstTimeLogin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first_time_login)
-
         val etPasswords: EditText = findViewById(R.id.etPasswords)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         val etConfirmPassword: EditText = findViewById(R.id.etConfirmPassword)
-
         val btnConfirmPassword: Button = findViewById(R.id.btnChangePassword)
         btnConfirmPassword.setBackgroundResource(R.drawable.btn_disabled_bg)
         btnConfirmPassword.setOnClickListener {
@@ -39,13 +34,10 @@ class FirstTimeLogin : AppCompatActivity() {
                             ) {
                                 val mAuth = Firebase.auth
                                 val user = mAuth.currentUser
-
-                                user!!.updatePassword(etPasswords.text.toString()).addOnCompleteListener {
-                                        task ->
-                                        if(task.isSuccessful){
-
+                                user!!.updatePassword(etPasswords.text.toString())
+                                    .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
                                             val dbRef = FirebaseFirestore.getInstance()
-
                                             dbRef.collection("employees")
                                                 .whereEqualTo("Email", user.email.toString()).get()
                                                 .addOnSuccessListener { result ->
@@ -53,8 +45,7 @@ class FirstTimeLogin : AppCompatActivity() {
                                                         docs.reference.update("IsFirstLogin", false)
                                                     }
                                                 }
-
-                                           Toast.makeText(
+                                            Toast.makeText(
                                                 this,
                                                 "Successfully changed password.",
                                                 Toast.LENGTH_SHORT
@@ -65,8 +56,7 @@ class FirstTimeLogin : AppCompatActivity() {
                                                 SignInActivity::class.java
                                             )
                                             startActivity(i)
-
-                                        }else{
+                                        } else {
                                             Toast.makeText(
                                                 this,
                                                 task.exception.toString(),
@@ -82,14 +72,12 @@ class FirstTimeLogin : AppCompatActivity() {
                         DialogInterface.BUTTON_NEGATIVE -> {}
                     }
                 }
-
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setMessage("Confirm change password?")
                 .setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show()
         }
     }
-
     override fun onBackPressed() {
 
     }

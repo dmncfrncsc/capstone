@@ -1,14 +1,12 @@
 package com.example.capstone
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -19,8 +17,6 @@ class TransferTableAdapter(
     private val tableNums: TextView
 ) :
     RecyclerView.Adapter<TransferTableAdapter.MyViewHolder>() {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
             LayoutInflater.from(parent.context)
@@ -34,12 +30,10 @@ class TransferTableAdapter(
         val currentItem = tableList[position]
         holder.tableTyp.text = currentItem.Category.toString()
         holder.tableNum.text = currentItem.id.toString()
-
         if (holder.tableTyp.text.equals("Door")) {
             holder.itemView.visibility = View.GONE
             holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
         }
-
         if (holder.tableTyp.text.equals("Table")) {
             holder.iconType.setImageResource(R.drawable.icon_table)
         }
@@ -51,17 +45,13 @@ class TransferTableAdapter(
             holder.tableTyp.setTextColor(Color.WHITE)
             holder.tableNum.setTextColor(Color.WHITE)
             holder.poundSign.setTextColor(Color.WHITE)
-
         } else {
             holder.itemView.setBackgroundResource(R.drawable.table_items_bg)
             holder.tableTyp.setTextColor(Color.BLACK)
             holder.tableNum.setTextColor(Color.BLACK)
             holder.poundSign.setTextColor(Color.BLACK)
         }
-
         holder.btnTable.setOnClickListener {
-            //Toast.makeText(holder.itemView.context,"${holder.tableNum.text}, ${holder.tableTyp.text}", Toast.LENGTH_LONG).show()
-
             val tableArray: ArrayList<DataTable> = arrayListOf()
             val dbRef = FirebaseDatabase.getInstance().reference.child("Dine").child("Tables")
             dbRef.addValueEventListener(object : ValueEventListener {
@@ -69,10 +59,8 @@ class TransferTableAdapter(
                     if (p0.exists()) {
                         for (tableSnapshot in p0.children) {
                             val table = tableSnapshot.getValue(DataTable::class.java)
-
                             tableArray.add(table!!)
                         }
-
                         swapOrders()
                         swapTables(dbRef, tableArray)
                         val activity = it.context as AppCompatActivity
@@ -81,13 +69,9 @@ class TransferTableAdapter(
                             .commitNow()
                     }
                 }
-
-
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-
-
                 private fun swapOrders() {
                     val docId = DocumentIdData()
                     val dbArrayList: ArrayList<DataOrders> = arrayListOf()
@@ -96,7 +80,6 @@ class TransferTableAdapter(
                     val queueArrayList2: ArrayList<DataSwapQueue> = arrayListOf()
                     val item1 = Integer.parseInt(currentItem.id.toString())
                     val item2 = Integer.parseInt(tableNums.text.toString())
-
                     dbQueue.whereEqualTo("tableId", item2).get().addOnSuccessListener() {
                             task ->
                         for (document in task) {
@@ -110,19 +93,16 @@ class TransferTableAdapter(
                                 }
                             }
                         }
-
                         for(o in queueArrayList){
                             if (item2 == o.tableId) {
                                 o.swapTables(item1)
                             }
                         }
-
                         dbQueue.whereEqualTo("tableId", item1).get().addOnSuccessListener(){
                                 task2 ->
                             for(document2 in task2){
                                 val data = document2.toObject(DataSwapQueue::class.java)
                                 docId.documentId1 = document2.id
-
                                 queueArrayList2.add(data)
                                 document2.reference.delete()
                                 for(o in queueArrayList2){
@@ -131,14 +111,12 @@ class TransferTableAdapter(
                                     }
                                 }
                             }
-
                             for(o in queueArrayList2){
                                 if (item1 == o.tableId) {
                                     o.swapTables(item2)
                                 }
                             }
                             queueArrayList.addAll(queueArrayList2)
-
                             for (i in queueArrayList) {
                                 val swappedData = QueueSwap(
                                     i.tableId,
@@ -149,42 +127,32 @@ class TransferTableAdapter(
                                     dbQueue.document(i.QueueId.toString()).set(swappedData)
                                 }
                             }
-
                         }
                     }
-
 
                     //swap tables
                     dbRefs.whereEqualTo("tableId", item2).get().addOnSuccessListener { result1 ->
                         for (document in result1) {
                             dbArrayList.add(document.toObject(DataOrders::class.java))
                             document.reference.delete()
-
                         }
                         for (o in dbArrayList) {
                             if (item2 == o.tableId) {
-
                                 o.swapTables(item1)
                             }
                         }
                         dbRefs.whereEqualTo("tableId", item1).get()
                             .addOnSuccessListener { results ->
-
                                 for (docs in results) {
                                     dbArrayList2.add(docs.toObject(DataOrders::class.java))
                                     docs.reference.delete()
                                 }
-
                                 for (i in dbArrayList2) {
                                     if (item1 == i.tableId) {
                                         i.swapTables(item2)
                                     }
-
                                 }
                                 dbArrayList.addAll(dbArrayList2)
-
-
-
                                 for (i in dbArrayList) {
                                     val swappedData = DataOrders(
                                         i.tableId,
@@ -200,15 +168,9 @@ class TransferTableAdapter(
                                     )
                                     dbRefs.document().set(swappedData)
                                 }
-
-
                             }
-
                     }
-
-
                 }
-
                 private fun swapTables(
                     dbRef: DatabaseReference,
                     tableArrays: ArrayList<DataTable>
@@ -217,12 +179,10 @@ class TransferTableAdapter(
                     var color: String? = null
                     var status2: Boolean? = null
                     var color2: String? = null
-
                     for (o in tableArrays) {
                         if (tableNums.text.equals(o.id.toString())) {
                             status = o.Status
                             color = o.Color
-
                         }
                     }
                     for (o in tableArrays) {
@@ -231,11 +191,9 @@ class TransferTableAdapter(
                             color2 = o.Color
                         }
                     }
-
                     for (o in tableArrays) {
                         if (tableNums.text.equals(o.id.toString())) {
                             o.editInfo(status2!!, color2!!)
-
                         }
                     }
                     for (o in tableArrays) {
@@ -243,7 +201,6 @@ class TransferTableAdapter(
                             o.editInfo(status!!, color!!)
                         }
                     }
-
                     for (o in tableArrays) {
                         if (o.id.toString() == tableNums.text) {
                             dbRef.child(o.id.toString()).child("Status").setValue(o.Status)
@@ -251,7 +208,6 @@ class TransferTableAdapter(
                             dbRef.removeEventListener(this)
                         }
                     }
-
                     for (o in tableArrays) {
                         if (o.id.toString() == currentItem.id.toString()) {
                             dbRef.child(o.id.toString()).child("Status").setValue(o.Status)
@@ -259,13 +215,9 @@ class TransferTableAdapter(
                             dbRef.removeEventListener(this)
                         }
                     }
-
                 }
-
             })
-
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -278,7 +230,5 @@ class TransferTableAdapter(
         val iconType: ImageView = itemView.findViewById(R.id.iconType)
         val poundSign: TextView = itemView.findViewById(R.id.poundSign)
         val btnTable: LinearLayout = itemView.findViewById(R.id.btnTable)
-
     }
-
 }

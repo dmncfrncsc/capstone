@@ -21,8 +21,6 @@ class TransferTableCompleteFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val btnConfirm: Button = requireView().findViewById(R.id.btnConfirmTransfer)
-
-
         btnConfirm.setOnClickListener{
             val activity = it.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()

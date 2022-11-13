@@ -1,6 +1,5 @@
 package com.example.capstone
 
-
 import android.app.ActionBar
 import android.app.Dialog
 import android.content.DialogInterface
@@ -20,7 +19,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
 import java.text.DecimalFormat
-
 
 class TakeOrderFragment(
     table: TextView,
@@ -58,23 +56,15 @@ class TakeOrderFragment(
         val btnDrinks: Button = view.findViewById(R.id.btnDrinks)
         val btnMisc: Button = view.findViewById(R.id.btnCombo)
         val layoutManager = LinearLayoutManager(context)
-
         val btnBackOrder: ImageButton = view.findViewById(R.id.btnBackOrder)
-
         btnViewOrderList = view.findViewById(R.id.btnViewOrderList)
         menuRecyclerView = view.findViewById(R.id.takeOrderMenuList)
-
         menuRecyclerView.layoutManager = layoutManager
         mealMenuArrayList = arrayListOf<DataMeal>()
         beveragesMenuArrayList = arrayListOf<DataBeverages>()
-
         txttableType.text = tableType.text
         txtTableNum.text = "${currentTable.text}"
-
-
         dbref = FirebaseFirestore.getInstance()
-
-
         getMealData(
             txttableType,
             txtTableNum,
@@ -82,7 +72,6 @@ class TakeOrderFragment(
             currentActivity,
             menuClicked
         )
-
         if (orderList.size > 0) {
             btnViewOrderList.isEnabled = true
             btnViewOrderList.setBackgroundResource(R.drawable.floating_button_background)
@@ -90,22 +79,16 @@ class TakeOrderFragment(
             btnViewOrderList.isEnabled = false
             btnViewOrderList.setBackgroundResource(R.drawable.floating_button_background_disabled)
         }
-
         val typeface: Typeface = Typeface.createFromAsset(requireActivity().assets, "carbon bl.ttf")
-
         val txtAvailableMenu: TextView = view.findViewById(R.id.txtAvailableMenu)
         txtAvailableMenu.typeface = typeface
-
         btnMeal.setBackgroundResource(R.drawable.category_selected_bg)
         btnMeal.setTextColor(Color.parseColor("#3498db"))
-
         btnMeal.setOnClickListener {
             btnMeal.setBackgroundResource(R.drawable.category_selected_bg)
             btnMeal.setTextColor(Color.parseColor("#3498db"))
-
             btnDrinks.setBackgroundColor(Color.parseColor("#3498db"))
             btnDrinks.setTextColor(Color.WHITE)
-
             btnMisc.setBackgroundColor(Color.parseColor("#3498db"))
             btnMisc.setTextColor(Color.WHITE)
             menuClicked.clickedBeverages(false)
@@ -117,9 +100,7 @@ class TakeOrderFragment(
                 currentActivity,
                 menuClicked
             )
-
         }
-
         btnDrinks.setOnClickListener {
             menuClicked.clickedBeverages(true)
             menuClicked.clickedMeal(false)
@@ -130,27 +111,17 @@ class TakeOrderFragment(
                 currentActivity,
                 menuClicked
             )
-
             btnDrinks.setBackgroundResource(R.drawable.category_selected_bg)
             btnDrinks.setTextColor(Color.parseColor("#3498db"))
-
             btnMeal.setBackgroundColor(Color.parseColor("#3498db"))
             btnMeal.setTextColor(Color.WHITE)
-
             btnMisc.setBackgroundColor(Color.parseColor("#3498db"))
             btnMisc.setTextColor(Color.WHITE)
-
         }
-
-
-
-
-
         if (orderList.size == 0) {
             btnViewOrderList.isEnabled = false
             btnViewOrderList.setBackgroundResource(R.drawable.floating_button_background_disabled)
         }
-
         btnViewOrderList.setOnClickListener {
             if (btnViewOrderList.isEnabled) {
                 val activity = it.context as AppCompatActivity
@@ -165,24 +136,17 @@ class TakeOrderFragment(
                     ).commitNow()
             }
         }
-
         btnMisc.setOnClickListener {
-
             btnMisc.setTextColor(Color.parseColor("#3498db"))
-
             btnMeal.setBackgroundColor(Color.parseColor("#3498db"))
             btnMeal.setTextColor(Color.WHITE)
-
             btnDrinks.setBackgroundColor(Color.parseColor("#3498db"))
             btnDrinks.setTextColor(Color.WHITE)
-
             val dialogBinding = layoutInflater.inflate(R.layout.misc_custom_dialogbox, null)
-
             val myDialog = Dialog(requireContext())
-
-            val etName: EditText = dialogBinding.findViewById(R.id.etName)
-            val etPrice: EditText = dialogBinding.findViewById(R.id.etPrice)
-            val etQty: EditText = dialogBinding.findViewById(R.id.etQuantity)
+            var etName: EditText = dialogBinding.findViewById(R.id.etName)
+            var etPrice: EditText = dialogBinding.findViewById(R.id.etPrice)
+            var etQty: EditText = dialogBinding.findViewById(R.id.etQuantity)
             val btnAddCart: Button = dialogBinding.findViewById(R.id.btnAddCart)
             btnMisc.setBackgroundResource(R.drawable.category_selected_bg)
             myDialog.setContentView(dialogBinding)
@@ -190,7 +154,7 @@ class TakeOrderFragment(
             myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             myDialog.show()
             val window: Window? = myDialog.window
-            window?.setLayout(1000, ActionBar.LayoutParams.WRAP_CONTENT);
+            window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
             btnAddCart.setOnClickListener {
                 if (etName.text.toString() == "" ||
                     etPrice.text.toString() == "" ||
@@ -230,25 +194,20 @@ class TakeOrderFragment(
                                             )
                                         )
                                         myDialog.cancel()
+                                        Log.d("OrderList", orderList.toString())
                                     }
                                 }
                                 DialogInterface.BUTTON_NEGATIVE -> {}
                             }
                         }
-
                     val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
                     builder.setMessage("Are you sure you want to add this item?")
                         .setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show()
                 }
             }
-
-
             myDialog.setOnCancelListener {
-
-
                 if (menuClicked.isMeal == true && menuClicked.isBeverages == false) {
-
                     getMealData(
                         txttableType,
                         txtTableNum,
@@ -258,7 +217,6 @@ class TakeOrderFragment(
                     )
                     btnMeal.setBackgroundResource(R.drawable.category_selected_bg)
                     btnMeal.setTextColor(Color.parseColor("#3498db"))
-
                     btnDrinks.setBackgroundColor(Color.parseColor("#3498db"))
                     btnDrinks.setTextColor(Color.WHITE)
                 } else {
@@ -269,27 +227,22 @@ class TakeOrderFragment(
                         currentActivity,
                         menuClicked
                     )
-
                     btnDrinks.setBackgroundResource(R.drawable.category_selected_bg)
                     btnDrinks.setTextColor(Color.parseColor("#3498db"))
                     btnMeal.setBackgroundColor(Color.parseColor("#3498db"))
                     btnMeal.setTextColor(Color.WHITE)
                 }
-
-
                 btnMisc.setBackgroundColor(Color.parseColor("#3498db"))
                 btnMisc.setTextColor(Color.WHITE)
             }
         }
         btnBackOrder.setOnClickListener {
-
             if (orderList.size == 0) {
                 val activity = it.context as AppCompatActivity
                 activity.supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, SelectTableFragment())
                     .commitNow()
             } else {
-
              Toast.makeText(requireContext(), "You have unconfirmed orders.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -297,12 +250,11 @@ class TakeOrderFragment(
 
     private fun checkExistingItem(estName: String, orderList: ArrayList<DataCartList>): Boolean {
         for (i in orderList) {
-            if (i.ItemName == estName) {
+            if (i.ItemName.equals(estName, ignoreCase = true)) {
                 return true
             }
         }
         return false
-
     }
 
     private fun getBeverages(
@@ -313,7 +265,6 @@ class TakeOrderFragment(
         menuClicked: MenuClicked,
     ) {
         beveragesMenuArrayList.clear()
-
         dbref.collection("beverages").addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(p0: QuerySnapshot?, p1: FirebaseFirestoreException?) {
                 if (p1 != null) {
@@ -321,7 +272,6 @@ class TakeOrderFragment(
                     return
                 }
                 for (dc: DocumentChange in p0?.documentChanges!!) {
-
                     val data = dc.document.toObject(DataBeverages::class.java)
                     var obj: Any? = null
                     var index: Int? = null
@@ -335,10 +285,8 @@ class TakeOrderFragment(
                                 orderList,
                                 btnViewOrderList,
                                 currentActivity
-
                             )
                         }
-
                     }
                     if (dc.type == DocumentChange.Type.MODIFIED) {
                         if (menuClicked.isMeal == false) {
@@ -349,7 +297,6 @@ class TakeOrderFragment(
                                 }
                             }
                             if (obj != null) {
-
                                 beveragesMenuArrayList[index as Int] = data
                             }
                             menuRecyclerView.adapter = MenuListBeveragesAdapter(
@@ -359,12 +306,10 @@ class TakeOrderFragment(
                                 orderList,
                                 btnViewOrderList,
                                 this@TakeOrderFragment.currentActivity
-
                             )
                         }
                     }
                     if (dc.type == DocumentChange.Type.REMOVED) {
-
                         if (menuClicked.isMeal == false) {
                             for (i in beveragesMenuArrayList) {
                                 if (i.BeverageName == data.BeverageName) {
@@ -378,19 +323,12 @@ class TakeOrderFragment(
                                 orderList,
                                 btnViewOrderList,
                                 this@TakeOrderFragment.currentActivity
-
                             )
                         }
-
                     }
-
-
                 }
-
             }
-
         })
-
     }
 
     private fun getMealData(
@@ -420,7 +358,6 @@ class TakeOrderFragment(
                                 btnViewOrderList, currentActivity
                             )
                         }
-
                     }
                     if (dc.type == DocumentChange.Type.MODIFIED) {
                         if (menuClicked.isBeverages == null || menuClicked.isBeverages == false) {
@@ -431,7 +368,6 @@ class TakeOrderFragment(
                                 }
                             }
                             if (obj != null) {
-
                                 mealMenuArrayList[index as Int] = data
                             }
                             menuRecyclerView.adapter = MenuListMealAdapter(
@@ -440,7 +376,6 @@ class TakeOrderFragment(
                             )
                         }
                     }
-
                     if (dc.type == DocumentChange.Type.REMOVED) {
                         if (menuClicked.isBeverages == null || menuClicked.isBeverages == false) {
                             for (i in mealMenuArrayList) {
@@ -453,19 +388,9 @@ class TakeOrderFragment(
                                 btnViewOrderList, currentActivity
                             )
                         }
-
                     }
-
-
                 }
-
-
             }
-
         })
-
-
     }
-
-
 }

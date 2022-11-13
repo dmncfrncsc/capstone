@@ -1,6 +1,4 @@
 package com.example.capstone
-
-
 data class DataOrders(
     var tableId: Int? = null,
     var itemName: String? = null,
@@ -13,7 +11,6 @@ data class DataOrders(
     var imageUrl: String? = null,
     var isBucket: Boolean? = null,
 ) {
-
     fun swapTables(tableId: Int) {
         this.tableId = tableId
     }

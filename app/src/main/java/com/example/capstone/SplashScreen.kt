@@ -9,11 +9,9 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
         if(supportActionBar!=null){
             this.supportActionBar!!.hide()
         }
-
         val iv_logo = findViewById<ImageView>(R.id.iv_logo)
         iv_logo.alpha = 0F
         iv_logo. animate().setDuration(3000).alpha(1f).withEndAction{

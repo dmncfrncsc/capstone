@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,7 +16,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.*
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
-
 
 class CartAdapter(
     private val cartList: ArrayList<DataCartList>,
@@ -43,7 +41,6 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
         tableData = arrayListOf()
         mealQuantity = arrayListOf()
         beverages = arrayListOf()
@@ -55,15 +52,10 @@ class CartAdapter(
         holder.txtPrice.text = dec.format(currentItem.price.toString().toDouble())
         holder.subtotal.text = dec.format(currentItem.subTotal.toString().toDouble())
         val currentItemCode = currentItem.ItemCode
-        val currentBucket = currentItem.isBucket
-
         if (currentItem.ImageUrl.isNotEmpty()) {
             Picasso.with(holder.itemView.context).load(currentItem.ImageUrl).fit().into(holder.orderImage)
 
-        }else{
-
-        }
-
+        }else{}
         for (o in cartList) {
             price += o.subTotal
         }
@@ -71,15 +63,10 @@ class CartAdapter(
             getMeals(currentItemCode, holder)
             getBeverages(currentItemCode, holder)
         }
-
         txtTotal.text = dec.format(price)
-
-
         holder.btnAdd.setOnClickListener {
             var currentQty = Integer.parseInt(holder.txtQty.text.toString())
-            var discount = currentQty * 20
             if (currentItem.category.equals("beverages", ignoreCase = true)) {
-
                 if (currentItem.isBucket) {
                     val condition =Integer.parseInt(holder.txtAvailable.text.toString()) - 6
                     var newprice: Long = 0
@@ -87,7 +74,6 @@ class CartAdapter(
                         for (i in cartList) {
                             if (i.ItemName.toString() == holder.txtItemName.text) {
                                 val dbRefs = FirebaseFirestore.getInstance()
-
                                 dbRefs.collection("beverages")
                                     .whereEqualTo("ItemCode", currentItem.ItemCode).get()
                                     .addOnSuccessListener { result ->
@@ -96,7 +82,6 @@ class CartAdapter(
                                                 "Quantity",
                                                 Integer.parseInt(holder.txtAvailable.text.toString()) - 6
                                             )
-
                                             currentQty += 1
                                             holder.txtQty.text = currentQty.toString()
                                             i.addQty(currentQty)
@@ -108,10 +93,8 @@ class CartAdapter(
                                             txtTotal.text = dec.format(newprice)
                                         }
                                     }
-
                             }
                         }
-
                     }else{
                         Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                     }
@@ -119,12 +102,9 @@ class CartAdapter(
                 else {
                     var newprice: Long = 0
                     if (Integer.parseInt(holder.txtAvailable.text.toString()) != 0) {
-
                         for (i in cartList) {
                             if (i.ItemName.toString() == holder.txtItemName.text) {
-
                                 val dbRefs = FirebaseFirestore.getInstance()
-
                                 dbRefs.collection("beverages")
                                     .whereEqualTo("ItemCode", currentItem.ItemCode).get()
                                     .addOnSuccessListener { result ->
@@ -151,19 +131,13 @@ class CartAdapter(
                         Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
-
             if (currentItem.category.equals("meal", ignoreCase = true)) {
                 var newprice: Long = 0
                 if (Integer.parseInt(holder.txtAvailable.text.toString()) != 0) {
-
-
                     for (i in cartList) {
                         if (i.ItemName.toString() == holder.txtItemName.text) {
-
                             val dbRefs = FirebaseFirestore.getInstance()
-
                             dbRefs.collection("meals")
                                 .whereEqualTo("ItemCode", currentItem.ItemCode).get()
                                 .addOnSuccessListener { result ->
@@ -171,9 +145,7 @@ class CartAdapter(
                                         docs.reference.update(
                                             "Serving",
                                             Integer.parseInt(holder.txtAvailable.text.toString()) - 1
-
                                         )
-
                                         currentQty += 1
                                         holder.txtQty.text = currentQty.toString()
                                         holder.subtotal.text = dec.format(Integer.parseInt(i.subTotal.toString()))
@@ -183,7 +155,6 @@ class CartAdapter(
                                             newprice += o.subTotal
                                         }
                                         txtTotal.text = dec.format(newprice)
-
                                     }
                                 }
                         }
@@ -193,7 +164,6 @@ class CartAdapter(
                     Toast.makeText(holder.itemView.context, "Maximum quantity is reached", Toast.LENGTH_SHORT).show()
                 }
             }
-
             if(currentItem.category.equals("misc", ignoreCase = true)){
                 var newprice: Long = 0
                 currentQty += 1
@@ -204,29 +174,22 @@ class CartAdapter(
                         holder.subtotal.text = dec.format(newprice)
                         i.addQty(currentQty)
                     }
-
                 }
                 for (o in cartList) {
                     newprice += o.subTotal
                 }
                 txtTotal.text = dec.format(newprice)
             }
-
-
-
         }
         holder.btnSub.setOnClickListener {
             var currentQty = Integer.parseInt(holder.txtQty.text.toString())
             var newprice: Long = 0
-
             if (currentItem.category.equals("beverages", ignoreCase = true)){
-
                 if(currentItem.isBucket){
                     if (Integer.parseInt(holder.txtQty.text.toString()) > 1) {
                         for (i in cartList) {
                             if (i.ItemName.toString() == holder.txtItemName.text) {
                                 val dbRefs = FirebaseFirestore.getInstance()
-
                                 dbRefs.collection("beverages")
                                     .whereEqualTo("ItemCode", currentItem.ItemCode).get()
                                     .addOnSuccessListener { result ->
@@ -246,21 +209,16 @@ class CartAdapter(
                                                 dec.format(Integer.parseInt(i.subTotal.toString()))
                                         }
                                     }
-
                             }
                         }
-
                     }
                 }
-
                 else{
                     var newprice: Long = 0
                     if (Integer.parseInt(holder.txtQty.text.toString()) > 1) {
                         for (i in cartList) {
                             if (i.ItemName.toString() == holder.txtItemName.text) {
-
                                 val dbRefs = FirebaseFirestore.getInstance()
-
                                 dbRefs.collection("beverages")
                                     .whereEqualTo("ItemCode", currentItem.ItemCode).get()
                                     .addOnSuccessListener { result ->
@@ -282,18 +240,14 @@ class CartAdapter(
                                     }
                             }
                         }
-
                     }
                 }
             }
-
             if (currentItem.category.equals("meal", ignoreCase = true)){
                 if (Integer.parseInt(holder.txtQty.text.toString()) > 1) {
-
                     for (i in cartList) {
                         if (i.ItemName.toString() == holder.txtItemName.text) {
                             val dbRefs = FirebaseFirestore.getInstance()
-
                             dbRefs.collection("meals")
                                 .whereEqualTo("ItemCode", currentItem.ItemCode).get()
                                 .addOnSuccessListener { result ->
@@ -301,27 +255,20 @@ class CartAdapter(
                                         docs.reference.update(
                                             "Serving",
                                             Integer.parseInt(holder.txtAvailable.text.toString()) + 1
-
                                         )
-
                                         for (o in cartList) {
                                             newprice += o.subTotal
                                         }
                                         txtTotal.text = dec.format(newprice)
                                         holder.txtQty.text = currentQty.toString()
                                         holder.subtotal.text = dec.format(Integer.parseInt(i.subTotal.toString()))
-
                                         getMeals(currentItem.ItemCode, holder)
-
                                     }
                                 }
                         }
                     }
-
                 }
             }
-
-
             if(currentItem.category.equals("misc", ignoreCase = true)){
                 if(Integer.parseInt(holder.txtQty.text.toString()) > 1){
                     var newpricess: Long = 0
@@ -332,25 +279,20 @@ class CartAdapter(
                             holder.txtQty.text = currentQty.toString()
                             holder.subtotal.text = dec.format(Integer.parseInt(i.subTotal.toString()))
                         }
-
                     }
                     for (o in cartList) {
                         newpricess += o.subTotal
                     }
                     txtTotal.text = dec.format(newpricess)
                 }
-
             }
-
         }
-
         holder.btnRemove.setOnClickListener {
             var newprice: Long = 0
             val dialogClickListener =
                 DialogInterface.OnClickListener { dialog, which ->
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
-
                             if (currentItem.category.equals("beverages", ignoreCase = true)){
                                 if(currentItem.isBucket){
                                     for (i in cartList) {
@@ -375,7 +317,6 @@ class CartAdapter(
                                                         break;
                                                     }
                                                 }
-
                                             Toast.makeText(holder.itemView.context, "${currentItem.ItemName} successfully removed.", Toast.LENGTH_SHORT).show()
                                         }
                                     }
@@ -435,9 +376,7 @@ class CartAdapter(
                                             }
                                     }
                                 }
-
                             }
-
                             if(currentItem.category.equals("misc", ignoreCase = true)){
                                 for (i in cartList) {
                                     if (i.ItemName.toString() == holder.txtItemName.text) {
@@ -453,12 +392,11 @@ class CartAdapter(
                             }
                         }
                         DialogInterface.BUTTON_NEGATIVE -> {}
-
                     }
                 }
 
             val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
-            builder.setMessage("Remove item ${currentItem.ItemName.toString()} to this list?")
+            builder.setMessage("Remove item ${currentItem.ItemName} to this list?")
                 .setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show()
         }
@@ -475,7 +413,6 @@ class CartAdapter(
                 )
                 .commitNow()
         }
-
         btnConfirmOrders.setOnClickListener {
             if(cartList.size !=0){
                 getTableData()
@@ -483,8 +420,7 @@ class CartAdapter(
                     dbRef.whereEqualTo("tableId", Integer.parseInt(tableNum.text.toString()))
                 val tsLong = System.currentTimeMillis() / 1000
                 val ts = tsLong.toString()
-                val queue: DataQueue = DataQueue()
-
+                val queue = DataQueue()
                 queue.CreateTableId(Integer.parseInt(tableNum.text.toString()))
                 queue.CreateTimeStamp(ts)
 
@@ -496,14 +432,12 @@ class CartAdapter(
                 )
                 val ref: DocumentReference = db.collection("orderQueue").document()
                 val docId = ref.id
-
                 val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
                             updateTableData()
                             db.collection("orderQueue").document(docId).set(docData)
                             for (o in cartList) {
-
                                 if(o.category.equals("meal",ignoreCase = true) || o.category.equals("beverages",ignoreCase = true)){
                                     val cart = DataOrders(
                                         o.TableId,
@@ -517,7 +451,8 @@ class CartAdapter(
                                         o.ImageUrl,
                                         o.isBucket
                                     )
-                                    dbRef.document().set(cart)
+                                   dbRef.document().set(cart)
+                                    Log.d("TEST", cart.toString())
                                 }
                                 else{
                                     val cart = DataOrders(
@@ -532,12 +467,10 @@ class CartAdapter(
                                         o.ImageUrl,
                                         o.isBucket
                                     )
-                                    dbRef.document().set(cart)
+                                  dbRef.document().set(cart)
+                                    Log.d("TEST", cart.toString())
                                 }
-
-
                             }
-
                             cartList.clear()
                             val activity = it.context as AppCompatActivity
                             activity.supportFragmentManager.beginTransaction()
@@ -545,7 +478,6 @@ class CartAdapter(
                                 .commitNow()
                         }
                         DialogInterface.BUTTON_NEGATIVE -> {}
-
                     }
                 }
                 val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
@@ -555,109 +487,12 @@ class CartAdapter(
             }else{
                 Toast.makeText(holder.itemView.context, "Empty orders", Toast.LENGTH_SHORT).show()
             }
-
-
-//            if (currentActivity!!.javaClass.toString() == OrderListFragment(
-//                    tableType,
-//                    tableNum
-//                ).javaClass.toString()
-//            ){
-//
-//            }
         }
-        /*    btnConfirmOrders.setOnClickListener {
-                val dbRef3 = dbRef.whereEqualTo("tableId", Integer.parseInt(tableNum.text.toString()))
-                val dbArrayList: ArrayList<DataOrders> = arrayListOf()
-                if (currentActivity!!.javaClass.toString() == OrderListFragment(
-                        tableType,
-                        tableNum
-                    ).javaClass.toString()
-                ) {
-                    dbRef3.get().addOnSuccessListener { result ->
-                        for (document in result) {
-
-                            dbArrayList.add(document.toObject(DataOrders::class.java))
-                        }
-
-                        for (o in cartList) {
-                            dbRef3.whereEqualTo("itemName", o.ItemName.toString())
-                                .get()
-                                .addOnSuccessListener { results ->
-                                    if (results.isEmpty) {
-                                        val cart = DataCartList(
-                                            o.TableId,
-                                            o.ItemName,
-                                            o.price,
-                                            o.quantity,
-                                            o.subTotal,
-                                            o.status
-                                        )
-                                        dbRef.document().set(cart)
-
-                                    }
-                                    else {
-                                        for (document in results) {
-                                            var qty= 0;
-                                           for(x in dbArrayList){
-                                               qty = Integer.parseInt(x.quantity.toString())
-                                           }
-                                            document.reference.update("quantity", (qty+o.quantity))
-                                            document.reference.update("subTotal", (qty+o.quantity)*o.price)
-                                        }
-                                    }
-
-                                    Toast.makeText(
-                                        holder.itemView.context,
-                                        "Successfully placed order",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    cartList.clear()
-                                    val activity = it.context as AppCompatActivity
-                                    activity.supportFragmentManager.beginTransaction()
-                                        .replace(R.id.fragment_container, currentActivity as Fragment)
-                                        .commitNow()
-                                }
-                        }
-                    }
-
-                } else {
-
-
-                        }
-
-                    val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
-                    builder.setMessage("Confirm Orders?")
-                        .setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show()
-                }
-            }*/
-
-
-
-
-        /* if (currentItem.category.equals("beverages", ignoreCase = true)) {
-             dbref3.collection("beverages").whereEqualTo("ItemCode", currentItem.ItemCode).get()
-                 .addOnSuccessListener { result ->
-                     for (docs in result) {
-                         val data = docs.toObject(DataBeverages::class.java)
-                         if (data.ItemCode == currentItem.ItemCode) {
-                             holder.txtAvailable.text = data.Quantity.toString()
-                             notifyItemChanged(position)
-                         }
-
-                     }
-                 }
-
-         }*/
-
-
     }
 
     private fun getBeverages(
         currentItemCode: Any,
         holder: MyViewHolder,
-
-
     ) {
         beverages.clear()
         dbref3.collection("beverages").addSnapshotListener(object : EventListener<QuerySnapshot> {
@@ -680,12 +515,10 @@ class CartAdapter(
                     }
                 }
             }
-
         })
     }
 
     private fun getMeals(currentItemCode: Any, holder: MyViewHolder) {
-
         mealQuantity.clear()
         dbref3.collection("meals").addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -696,36 +529,28 @@ class CartAdapter(
                 for (dc: DocumentChange in value?.documentChanges!!) {
                     val data = dc.document.toObject(DataMeal::class.java)
                     mealQuantity.add(data)
-
                     for (o in mealQuantity) {
                         if (o.ItemCode.toString()
                                 .equals(currentItemCode.toString(), ignoreCase = true)
                         ) {
-
                             holder.txtAvailable.text = o.Serving.toString()
-
                         }
                     }
                 }
             }
-
         })
     }
 
     private fun updateTableData() {
-
         for (i in tableData) {
             if (i.id.toString() == tableNum.text.toString()) {
                 dbref2.child(i.id.toString()).child("Status").setValue(false)
                 dbref2.child(i.id.toString()).child("Color").setValue("red")
             }
         }
-
-
     }
 
     private fun getTableData() {
-
         dbref2.addValueEventListener(object : ValueEventListener/*,
             tableAdapter.OnItemClickListener */ {
             override fun onDataChange(p0: DataSnapshot) {
@@ -735,20 +560,13 @@ class CartAdapter(
                         val table = tableSnapshot.getValue(DataTable::class.java)
                         tableData.add(table!!)
                     }
-
                 }
-
             }
-
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
-
         })
-
     }
-
 
     override fun getItemCount(): Int {
         return cartList.size
@@ -765,5 +583,4 @@ class CartAdapter(
         val txtAvailable: TextView = itemView.findViewById(R.id.txtRemainingQty)
         val orderImage: ImageView = itemView.findViewById(R.id.orderImage)
     }
-
 }

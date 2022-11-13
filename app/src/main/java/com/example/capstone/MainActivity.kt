@@ -3,7 +3,6 @@ package com.example.capstone
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,9 +14,7 @@ import com.google.firebase.ktx.Firebase
 import java.text.DateFormat
 import java.util.*
 
-
 class MainActivity : AppCompatActivity(){
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val auth = Firebase.auth
         if(auth.currentUser == null){
@@ -36,8 +33,6 @@ class MainActivity : AppCompatActivity(){
         setSupportActionBar(toolbar)
         val calendar: Date = Calendar.getInstance().time
         val currentDate: String = DateFormat.getDateInstance(DateFormat.FULL).format(calendar)
-        //var txtDate: TextView = findViewById(R.id.txtDate)
-        //txtDate.text = currentDate
         btnOrder.setOnClickListener{
             val selTableFrag: Fragment = SelectTableFragment()
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
@@ -45,30 +40,25 @@ class MainActivity : AppCompatActivity(){
             transaction.commit()
         }
         btnLogout.setOnClickListener{
-
             val dialogClickListener =
                 DialogInterface.OnClickListener { dialog, which ->
                     when (which) {
                         DialogInterface.BUTTON_POSITIVE -> {
-
                             auth.signOut()
                             val i = Intent(
                                 applicationContext,
                                 SignInActivity::class.java
                             )
-
                             startActivity(i)
                         }
                         DialogInterface.BUTTON_NEGATIVE -> {}
                     }
                 }
-
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show()
         }
     }
-
     override fun onBackPressed() {
 
     }

@@ -1,5 +1,4 @@
 package com.example.capstone
-
 data class DataMeal(
     var MealName: String? = null,
     var Price: Long? = null,

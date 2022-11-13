@@ -1,11 +1,8 @@
 package com.example.capstone
 
-
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +34,6 @@ class TransferTableFragment(private val tableNums: TextView, private val tableTy
         val tableTypeSpinner: Spinner = view.findViewById(R.id.dropdown_Type)
         val tableStatusSpinner: Spinner = view.findViewById(R.id.statusDropDown)
         val btnBack: ImageButton = view.findViewById(R.id.btnBackTransfer)
-
         btnBack.setOnClickListener{
             val activity = it.context as AppCompatActivity
             activity.supportFragmentManager.beginTransaction()
@@ -56,29 +52,21 @@ class TransferTableFragment(private val tableNums: TextView, private val tableTy
         )
         tableStatusAdapter.setDropDownViewResource(R.layout.spinner_status_design)
         tableTypeAdapter.setDropDownViewResource(R.layout.spinner_status_design)
-
-
         tableStatusSpinner.adapter = tableStatusAdapter
         tableStatusSpinner.setSelection(0)
-
         tableTypeSpinner.adapter = tableTypeAdapter
-
         val popup = PopupWindow(context)
-
         popup.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-
         val layoutManager = LinearLayoutManager(context)
         tableRecyclerView = view.findViewById(R.id.transferTableList)
         tableRecyclerView.layoutManager = layoutManager
         tableRecyclerView.setHasFixedSize(true)
         tableArrayList = arrayListOf()
-
         var status: Boolean? = null
         var type: String? = null
         tableStatusSpinner.onItemSelectedListener = (object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 var selectedType:String = tableStatusSpinner.selectedItem.toString()
-
                 if(selectedType == "All"){
                     status = null
                     getTableList(type, status)
@@ -100,7 +88,6 @@ class TransferTableFragment(private val tableNums: TextView, private val tableTy
         tableTypeSpinner.onItemSelectedListener = (object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 var selectedType:String = tableTypeSpinner.selectedItem.toString()
-
                 if(selectedType == "All"){
                     type=null
                     getTableList(type, status)
@@ -117,20 +104,16 @@ class TransferTableFragment(private val tableNums: TextView, private val tableTy
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
         })
     }
     private fun getTableList(selectedType: String?, status: Boolean?) {
-
         dbRef = FirebaseDatabase.getInstance().getReference("Dine").child("Tables")
-        dbRef.addValueEventListener(object : ValueEventListener/*,
-            tableAdapter.OnItemClickListener */ {
+        dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 tableArrayList.clear()
                 if (p0.exists()) {
                     for (tableSnapshot in p0.children) {
                         val table = tableSnapshot.getValue(DataTable::class.java)
-
                         if(selectedType.equals(null) && status==null){
                             tableArrayList.add(table!!)
                             for(i in tableArrayList){
@@ -156,23 +139,13 @@ class TransferTableFragment(private val tableNums: TextView, private val tableTy
                                 }
                             }
                         }
-
-
                     }
-
                 }
-
-
                 tableRecyclerView.adapter = TransferTableAdapter(tableArrayList,tableNums/*,this*/)
-
             }
-
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
-
         })
-
     }
 }

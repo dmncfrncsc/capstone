@@ -16,25 +16,20 @@ import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
 
 class SignInActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-
         val tv_app_name = findViewById<TextView>(R.id.tv_app_name)
         val btnSignIn = findViewById<Button>(R.id.btnSignin)
-
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-
         var etUsername: EditText = findViewById(R.id.etUsername)
         var etPassword: EditText = findViewById(R.id.etPassword)
         val typeface: Typeface = Typeface.createFromAsset(assets, "carbon bl.ttf")
         btnSignIn.typeface = typeface
         tv_app_name.typeface = typeface
-
         btnSignIn.setOnClickListener {
             loginUser(etUsername, etPassword)
         }
@@ -42,13 +37,9 @@ class SignInActivity : AppCompatActivity() {
         user?.let {
             val name = user.email
         }
-
-
         if (user != null) {
-            Log.d("TEST", user.email.toString())
             val users = arrayListOf<DataUser>()
             val dbRef = FirebaseFirestore.getInstance().collection("employees")
-
             dbRef.addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                     users.clear()
@@ -81,9 +72,7 @@ class SignInActivity : AppCompatActivity() {
                                   }
                               }
                           }
-
                     }
-                    Log.d("CURRENT USER", user.email.toString())
                     for (i in users) {
                         if (i.Email == user.email.toString()) {
                             val i = Intent(
@@ -110,11 +99,9 @@ class SignInActivity : AppCompatActivity() {
         } else if (TextUtils.isEmpty(password)) {
             etPassword.error = "Password cannot be empty"
         } else {
-
             mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-
                         dbRef.addSnapshotListener(object : EventListener<QuerySnapshot> {
                             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                                 users.clear()
@@ -147,13 +134,10 @@ class SignInActivity : AppCompatActivity() {
                                             }
                                         }
                                     }
-
                                 }
-
                                 for (o in users) {
                                     if (email.equals(o.Email, ignoreCase = true)) {
                                         if (o.Position.equals("waiter", ignoreCase = true)) {
-
                                             if (o.Status == false) {
                                                 Toast.makeText(
                                                     applicationContext,
@@ -180,8 +164,6 @@ class SignInActivity : AppCompatActivity() {
                                                     startActivity(i)
                                                 }
                                             }
-
-
                                         }
                                         else {
                                             Toast.makeText(
@@ -193,7 +175,6 @@ class SignInActivity : AppCompatActivity() {
                                     }
                                 }
                             }
-
                         })
                     } else {
                         Toast.makeText(
@@ -203,13 +184,9 @@ class SignInActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-
-
         }
-
     }
 
     override fun onBackPressed() {
-
     }
 }
