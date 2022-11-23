@@ -57,6 +57,7 @@ class MenuListBeveragesAdapter(
             holder.itemView.setBackgroundResource(R.drawable.low_stock_)
         }else{
             holder.tvWarning.visibility= View.GONE
+            holder.expandOption.visibility = View.VISIBLE
             holder.itemView.setBackgroundResource(R.drawable.take_order_menu_bg)
         }
 

@@ -22,9 +22,12 @@ class SelectTableAdapter(
         val currentItem = tableList[position]
         holder.tableType.text = (currentItem.Category.toString())
         holder.tableNum.text = (currentItem.id?.toString())
-        if (holder.tableType.text.equals("Door")) {
-            holder.itemView.visibility = View.GONE
-            holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+
+        var isVisible: Boolean = currentItem.visibility
+        holder.expandOption.visibility = if (isVisible) View.VISIBLE else View.GONE
+        holder.linear.setOnClickListener {
+            currentItem.visibility = !currentItem.visibility
+            notifyItemChanged(position)
         }
         if (holder.tableType.text.equals("Table")) {
             holder.iconType.setImageResource(R.drawable.icon_table)
@@ -32,6 +35,7 @@ class SelectTableAdapter(
         if (holder.tableType.text.equals("Hut")) {
             holder.iconType.setImageResource(R.drawable.icon_hut)
         }
+
         if (!currentItem.Status!!) {
             holder.itemView.setBackgroundResource(R.drawable.table_occupied_bg)
             holder.tableType.setTextColor(Color.WHITE)
@@ -49,12 +53,7 @@ class SelectTableAdapter(
             holder.btnViewOrders.isEnabled =false
             holder.btnTransferTable.isEnabled =false
         }
-        var isVisible: Boolean = currentItem.visibility
-        holder.expandOption.visibility = if (isVisible) View.VISIBLE else View.GONE
-        holder.linear.setOnClickListener {
-            currentItem.visibility = !currentItem.visibility
-            notifyItemChanged(position)
-        }
+
         holder.btnTakeOrder.setOnClickListener {
             val activity = it.context as AppCompatActivity
             var arrayList = arrayListOf<DataCartList>()

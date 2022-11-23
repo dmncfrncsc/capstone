@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
@@ -14,89 +13,91 @@
     <LinearLayout
         android:id="@+id/linearTop"
         android:layout_width="match_parent"
-        android:weightSum="10"
         android:layout_height="wrap_content"
+        android:gravity="start"
+        android:orientation="horizontal"
         android:paddingVertical="10dp"
         android:paddingStart="16dp"
-        android:orientation="horizontal"
-        android:gravity="start"
+        android:weightSum="10"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-                android:id="@+id/orderImage"
-                android:layout_weight="2.5"
+            android:id="@+id/orderImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginEnd="10dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:minWidth="80dp"
-                android:minHeight="80dp"
-                android:src="@drawable/foodpictureplaceholder" />
+            android:layout_weight="2.5"
+            android:minWidth="80dp"
+            android:minHeight="80dp"
+            android:src="@drawable/foodpictureplaceholder" />
+
         <LinearLayout
-                android:layout_weight="4"
-                android:layout_width="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvItemName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
+                android:fontFamily="@font/raleway_medium"
+                android:text="Item Name"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/tvItemName"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_medium"
-                    android:text="Item Name"
+
+                    android:fontFamily="@font/raleway"
+                    android:text="Price: ₱"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway"
+                    android:text="###.##"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
-                        android:fontFamily="@font/raleway"
-                        android:text="Price: ₱"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvPrice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                        android:fontFamily="@font/raleway"
-                        android:text="###.##"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway"
+                    android:text="Available: "
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
-                        android:fontFamily="@font/raleway"
-                        android:text="Available: "
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/txtRemainingStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                    <TextView
-                        android:id="@+id/txtRemainingStock"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:fontFamily="@font/raleway"
-                        android:text="##"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                    android:fontFamily="@font/raleway"
+                    android:text="##"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvWarning"
@@ -109,18 +110,21 @@
                 android:textSize="18sp"
                 android:visibility="invisible" />
         </LinearLayout>
+
         <FrameLayout
             android:id="@+id/category"
-            android:layout_weight="3"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
             <LinearLayout
                 android:id="@+id/linearCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:padding="5dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,13 +191,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvQ">
 
-            <ImageButton
 
-                android:id="@+id/btnAddQty"
+            <ImageButton
+                android:id="@+id/btnSubQty"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+
                 android:background="@drawable/background_qty"
-                android:src="@drawable/plus_img" />
+                android:src="@drawable/subtract_img" />
 
             <TextView
                 android:id="@+id/txtQty"
@@ -209,12 +214,13 @@
                 android:textSize="23sp" />
 
             <ImageButton
-                android:id="@+id/btnSubQty"
+                android:id="@+id/btnAddQty"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/background_qty"
-                android:src="@drawable/subtract_img" />
+                android:src="@drawable/plus_img" />
+
 
             <Button
                 android:id="@+id/btnAddToCart"

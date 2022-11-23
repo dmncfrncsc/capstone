@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_meal_options_bg"
             android:fontFamily="@font/raleway_medium"
-            android:text="ADD TO CART" />
+            android:text="ADD ORDER" />
     </LinearLayout>
 
 </LinearLayout>

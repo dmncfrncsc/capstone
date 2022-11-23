@@ -50,10 +50,12 @@ class MenuListMealAdapter(
             holder.linearCategory.visibility = View.GONE
             holder.tvWarning.visibility= View.VISIBLE
             holder.tvWarning.text = "STOCK IS LOW"
+
             holder.itemView.setBackgroundResource(R.drawable.low_stock_)
         }else{
             holder.linearCategory.visibility = View.GONE
             holder.tvWarning.visibility= View.GONE
+            holder.expandOption.visibility = View.VISIBLE
             holder.itemView.setBackgroundResource(R.drawable.take_order_menu_bg)
         }
         val dec = DecimalFormat("#,###.##")

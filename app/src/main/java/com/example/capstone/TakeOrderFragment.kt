@@ -327,6 +327,8 @@ class TakeOrderFragment(
                         }
                     }
                 }
+
+                Log.d("TEST", beveragesMenuArrayList.toString())
             }
         })
     }

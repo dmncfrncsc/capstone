@@ -260,6 +260,8 @@ class CartAdapter(
                                             newprice += o.subTotal
                                         }
                                         txtTotal.text = dec.format(newprice)
+                                        currentQty -= 1
+                                        i.subQty(currentQty)
                                         holder.txtQty.text = currentQty.toString()
                                         holder.subtotal.text = dec.format(Integer.parseInt(i.subTotal.toString()))
                                         getMeals(currentItem.ItemCode, holder)

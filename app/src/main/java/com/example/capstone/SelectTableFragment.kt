@@ -119,15 +119,17 @@ class SelectTableFragment(
                 if (p0.exists()) {
                     for (tableSnapshot in p0.children) {
                         val table = tableSnapshot.getValue(DataTable::class.java)
-                        if(selectedType.equals(null) && status==null){
-                            tableArrayList.add(table!!)
-                        }
-                        if((selectedType.equals(null) && table!!.Status == status) ||
-                            (table!!.Category.equals(selectedType) && status == null)){
-                            tableArrayList.add(table)
-                        }
-                        if(table!!.Category.equals(selectedType) && table!!.Status== status){
-                            tableArrayList.add(table)
+                        if(!table!!.Category.toString().equals("Door", ignoreCase = true)){
+                            if(selectedType.equals(null) && status==null){
+                                tableArrayList.add(table)
+                            }
+                            if((selectedType.equals(null) && table!!.Status == status) ||
+                                (table.Category.equals(selectedType) && status == null)){
+                                tableArrayList.add(table)
+                            }
+                            if(table.Category.equals(selectedType) && table!!.Status== status){
+                                tableArrayList.add(table)
+                            }
                         }
                     }
                 }
