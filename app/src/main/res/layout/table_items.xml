@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:background="@drawable/options_bg"
-            android:text="SERVED ORDERS"
+            android:text="SERVE ORDERS"
 
             android:layout_marginBottom="1dp"
             app:layout_constraintEnd_toEndOf="parent"

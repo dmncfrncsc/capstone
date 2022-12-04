@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SelectTableAdapter(
     private val tableList: ArrayList<DataTable>
@@ -44,6 +45,7 @@ class SelectTableAdapter(
             holder.btnTakeOrder.isEnabled = false
             holder.btnViewOrders.isEnabled =true
             holder.btnTransferTable.isEnabled =true
+            holder.btnServedOrders.isEnabled = true
         } else {
             holder.itemView.setBackgroundResource(R.drawable.table_items_bg)
             holder.tableType.setTextColor(Color.BLACK)
@@ -52,6 +54,7 @@ class SelectTableAdapter(
             holder.btnTakeOrder.isEnabled = true
             holder.btnViewOrders.isEnabled =false
             holder.btnTransferTable.isEnabled =false
+            holder.btnServedOrders.isEnabled = false
         }
 
         holder.btnTakeOrder.setOnClickListener {
@@ -80,12 +83,23 @@ class SelectTableAdapter(
                 ).commitNow()
         }
         holder.btnServedOrders.setOnClickListener{
-            val activity = it.context as AppCompatActivity
-            activity.supportFragmentManager.beginTransaction()
-                .add(
-                    R.id.fragment_container,
-                    ServedOrderFragment(holder.tableNum, holder.tableType)
-                ).commitNow()
+            val dbRef = FirebaseFirestore.getInstance().collection("orderQueue").whereEqualTo("tableId", Integer.parseInt(holder.tableNum.text.toString())).get().addOnSuccessListener {
+                task ->
+                for (documents in task){
+                    if(documents.exists()){
+                        val activity = it.context as AppCompatActivity
+                        activity.supportFragmentManager.beginTransaction()
+                            .add(
+                                R.id.fragment_container,
+                                ServedOrderFragment(holder.tableNum, holder.tableType)
+                            ).commitNow()
+                    }
+                }
+                if (task.isEmpty){
+                    Toast.makeText(holder.itemView.context, "No current orders.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
 
         }
     }

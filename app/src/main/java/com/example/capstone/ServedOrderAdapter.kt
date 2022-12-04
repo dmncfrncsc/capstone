@@ -1,18 +1,16 @@
 package com.example.capstone
 
-import android.app.Dialog
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.*
-import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.FirebaseFirestore
 
 class ServedOrderAdapter(
-    private val servedOrderArrayList: ArrayList<DataServedOrder>
+    private val servedOrderArrayList: ArrayList<DataServedOrder>,
+    private val tableType: TextView,
+    private val tableNum: TextView
 ) :
     RecyclerView.Adapter<ServedOrderAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -26,6 +24,13 @@ class ServedOrderAdapter(
 
         holder.orderNumber.text = currentItem.position.toString()
         holder.btnOrderQueue.setOnClickListener {
+            val activity = it.context as AppCompatActivity
+            activity.supportFragmentManager.beginTransaction()
+                .add(
+                    R.id.fragment_container,
+                    OrderQueueItemListFragment(holder.orderNumber.text.toString(), currentItem.queueId, tableType, tableNum)
+                ).commitNow()
+/*
            val dbRef = FirebaseFirestore.getInstance()
             dbRef.collection("orders").whereEqualTo("queueID", currentItem.queueId).get()
                 .addOnSuccessListener { task ->
@@ -35,7 +40,8 @@ class ServedOrderAdapter(
 
                     }
                 }
-            Log.d("TEST2", holder.orderArrayList.toString())
+*/
+
 
         }
 

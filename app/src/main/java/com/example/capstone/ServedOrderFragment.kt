@@ -1,12 +1,10 @@
 package com.example.capstone
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -58,7 +56,7 @@ class ServedOrderFragment(
                     servedOrderArrayList.add(DataServedOrder(document.id.toString(),Integer.parseInt(tableNum.text.toString()), queuePosition))
                 }
             }
-            servedItemsList.adapter = ServedOrderAdapter(servedOrderArrayList)
+            servedItemsList.adapter = ServedOrderAdapter(servedOrderArrayList, tableType, tableNum)
             Log.d("test", servedOrderArrayList.toString())
         }
     }
