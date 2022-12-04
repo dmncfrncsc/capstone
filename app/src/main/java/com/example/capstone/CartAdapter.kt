@@ -440,7 +440,7 @@ class CartAdapter(
                             updateTableData()
                             db.collection("orderQueue").document(docId).set(docData)
                             for (o in cartList) {
-                                if(o.category.equals("meal",ignoreCase = true) || o.category.equals("beverages",ignoreCase = true)){
+                                if(o.category.equals("meal",ignoreCase = true)){
                                     val cart = DataOrders(
                                         o.TableId,
                                         o.ItemName,
@@ -451,9 +451,26 @@ class CartAdapter(
                                         false,
                                         "order",
                                         o.ImageUrl,
-                                        o.isBucket
+                                        o.isBucket,
+                                        "meals"
                                     )
                                    dbRef.document().set(cart)
+                                    Log.d("TEST", cart.toString())
+                                }else if( o.category.equals("beverages",ignoreCase = true)){
+                                    val cart = DataOrders(
+                                        o.TableId,
+                                        o.ItemName,
+                                        o.price,
+                                        o.quantity,
+                                        o.subTotal,
+                                        docId,
+                                        false,
+                                        "order",
+                                        o.ImageUrl,
+                                        o.isBucket,
+                                        "drinks"
+                                    )
+                                    dbRef.document().set(cart)
                                     Log.d("TEST", cart.toString())
                                 }
                                 else{
@@ -467,7 +484,8 @@ class CartAdapter(
                                         false,
                                         "misc",
                                         o.ImageUrl,
-                                        o.isBucket
+                                        o.isBucket,
+                                        "misc"
                                     )
                                   dbRef.document().set(cart)
                                     Log.d("TEST", cart.toString())

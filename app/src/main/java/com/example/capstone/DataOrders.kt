@@ -10,6 +10,7 @@ data class DataOrders(
     var category: String? = null,
     var imageUrl: String? = null,
     var isBucket: Boolean? = null,
+    var type: String? = null
 ) {
     fun swapTables(tableId: Int) {
         this.tableId = tableId

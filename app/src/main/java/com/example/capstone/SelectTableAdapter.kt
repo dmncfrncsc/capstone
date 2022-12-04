@@ -79,6 +79,15 @@ class SelectTableAdapter(
                     TransferTableFragment(holder.tableNum, holder.tableType)
                 ).commitNow()
         }
+        holder.btnServedOrders.setOnClickListener{
+            val activity = it.context as AppCompatActivity
+            activity.supportFragmentManager.beginTransaction()
+                .add(
+                    R.id.fragment_container,
+                    ServedOrderFragment(holder.tableNum, holder.tableType)
+                ).commitNow()
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -96,5 +105,6 @@ class SelectTableAdapter(
         val poundSign: TextView = itemView.findViewById(R.id.poundSign)
         val btnViewOrders: Button = itemView.findViewById(R.id.btnViewOrders)
         val btnTransferTable: Button = itemView.findViewById(R.id.btnTransferTable)
+        val btnServedOrders: Button = itemView.findViewById(R.id.btnServedOrders)
     }
 }
