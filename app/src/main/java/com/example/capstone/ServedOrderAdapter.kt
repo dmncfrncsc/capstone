@@ -26,7 +26,7 @@ class ServedOrderAdapter(
 
         holder.orderNumber.text = currentItem.position.toString()
         holder.btnOrderQueue.setOnClickListener {
-/*            val dbRef = FirebaseFirestore.getInstance()
+           val dbRef = FirebaseFirestore.getInstance()
             dbRef.collection("orders").whereEqualTo("queueID", currentItem.queueId).get()
                 .addOnSuccessListener { task ->
                     for (document in task) {
@@ -35,7 +35,7 @@ class ServedOrderAdapter(
 
                     }
                 }
-            Log.d("TEST2", holder.orderArrayList.toString())*/
+            Log.d("TEST2", holder.orderArrayList.toString())
 
         }
 
